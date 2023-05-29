@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="150dp"
+            android:textAlignment="center"
+            android:text="Register"
+            android:textColor="#6672ff"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cl_register" >
+
+        <EditText
+            android:id="@+id/inp_username"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:background="@drawable/edit_bg"
+            android:ems="10"
+            android:hint="Username Anda"
+            android:inputType="textPersonName"
+            android:padding="16dp" />
+        <EditText
+            android:id="@+id/inp_nama"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:background="@drawable/edit_bg"
+            android:ems="10"
+            android:hint="Nama Lengkap Anda"
+            android:inputType="textPersonName"
+            android:padding="16dp" />
+        <EditText
+            android:id="@+id/inp_email"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:background="@drawable/edit_bg"
+            android:ems="10"
+            android:hint="Email Anda"
+            android:inputType="textPersonName"
+            android:padding="16dp" />
+        <EditText
+            android:id="@+id/inp_password"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:background="@drawable/edit_bg"
+            android:ems="10"
+            android:hint="Password Anda"
+            android:inputType="textPersonName"
+            android:padding="16dp" />
+        <Button
+            android:id="@+id/btn_register"
+            style="@style/loginButton"
+            android:layout_gravity="right"
+            android:layout_marginTop="@dimen/loginViewsMargin"
+            android:text="Register"/>
+        <TextView
+            android:id="@+id/tv_login"
+            style="@style/parent"
+            android:layout_marginTop="@dimen/loginViewsMargin"
+            android:text="@string/login_signup_hint"
+            android:textAlignment="textEnd"
+            android:textColor="@color/primaryTextColor"
+            android:textStyle="bold"
+            android:gravity="end"/>
+
+    </LinearLayout>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
