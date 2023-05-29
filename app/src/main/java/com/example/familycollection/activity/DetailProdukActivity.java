@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -20,6 +21,7 @@ public class DetailProdukActivity extends AppCompatActivity {
     RecyclerView recyclerViewProduk;
     LinearLayout layoutFooter;
     RelativeLayout btnKeranjang, btnBeli;
+    Intent mIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,13 @@ public class DetailProdukActivity extends AppCompatActivity {
         layoutFooter = (LinearLayout) findViewById(R.id.div_footer);
         btnKeranjang = (RelativeLayout) findViewById(R.id.btn_keranjang);
         btnBeli = (RelativeLayout) findViewById(R.id.btn_beli);
+
+        mIntent=getIntent();
+
+        textNama.setText(mIntent.getStringExtra("nama"));
+        textHarga.setText("Rp. "+mIntent.getStringExtra("harga"));
+        textDeskripsi.setText(mIntent.getStringExtra("deskripsi"));
+
         btnKeranjang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -3,7 +3,9 @@ package com.example.familycollection.activitymenu;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,12 +14,17 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.familycollection.RestApi.ApiClient;
+import com.example.familycollection.RestApi.ApiInterface;
 import com.example.familycollection.activity.CartActivity;
 import com.example.familycollection.activity.DetailProdukActivity;
 import com.example.familycollection.R;
 import com.example.familycollection.activity.ProdukActivity;
 import com.example.familycollection.activity.ResetActivity;
 import com.example.familycollection.adapter.AdapterProduk;
+import com.example.familycollection.models.GetProduct;
+import com.example.familycollection.models.GetProductCategory;
+import com.example.familycollection.models.Product;
 import com.example.familycollection.models.Produk;
 import com.example.familycollection.models.ProdukTransaksi;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -29,6 +36,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigation;
 
@@ -38,8 +49,11 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerViewHome;
     RelativeLayout btnCart;
     LinearLayoutManager layoutManager;
-    List<Produk> userList;
+    List<Product> productList;
     AdapterProduk adapter;
+    SharedPreferences sharedPreferences;
+    ApiInterface mApiInterface;
+    String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +74,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(Test1);
             }
         });
-
+        mApiInterface = ApiClient.getClient().create(ApiInterface.class);
+        sharedPreferences = getApplicationContext().getSharedPreferences("remember", Context.MODE_PRIVATE);
+        token = sharedPreferences.getString("TOKEN", "fail");
         layout1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,9 +95,7 @@ public class MainActivity extends AppCompatActivity {
         initData();
         layoutManager=new LinearLayoutManager(MainActivity.this);
         layoutManager.setOrientation(RecyclerView.HORIZONTAL);
-        adapter= new AdapterProduk(userList);
-        recyclerViewHome.setLayoutManager(layoutManager);
-        recyclerViewHome.setAdapter(adapter);
+
 
 
         bottomNavigation = findViewById(R.id.bottom_navigation);
@@ -110,10 +124,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
     private void initData() {
-        userList = new ArrayList<>();
-        userList.add(new Produk(R.drawable.top_background1,"Seragam SMP","100.000"));
-        userList.add(new Produk(R.drawable.top_background1,"Seragam SD","75.000"));
+        Call<GetProduct> getProductCall = mApiInterface.getProduct("1","Bearer "+token);
+        getProductCall.enqueue(new Callback<GetProduct>() {
+            @Override
+            public void onResponse(Call<GetProduct> call, Response<GetProduct> response) {
+                productList=response.body().getListProduct();
+                adapter= new AdapterProduk(productList);
+                recyclerViewHome.setLayoutManager(layoutManager);
+                recyclerViewHome.setAdapter(adapter);
+            }
+
+            @Override
+            public void onFailure(Call<GetProduct> call, Throwable t) {
+
+            }
+        });
+
     }
 
 }

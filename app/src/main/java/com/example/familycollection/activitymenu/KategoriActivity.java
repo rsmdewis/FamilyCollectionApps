@@ -5,33 +5,45 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.example.familycollection.R;
+import com.example.familycollection.RestApi.ApiClient;
+import com.example.familycollection.RestApi.ApiInterface;
 import com.example.familycollection.activity.CartActivity;
 import com.example.familycollection.adapter.AdapterKategori;
-import com.example.familycollection.adapter.AdapterProduk;
+import com.example.familycollection.models.GetProductCategory;
 import com.example.familycollection.models.Kategori;
-import com.example.familycollection.models.Produk;
+import com.example.familycollection.models.ProductCategory;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class KategoriActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigation;
     RecyclerView recyclerViewKategori;
+    ApiInterface mApiInterface;
 
     RelativeLayout btnCart;
     LinearLayoutManager layoutManager;
     List<Kategori> userList;
+    List<ProductCategory> productCategories;
     AdapterKategori adapter;
+    SharedPreferences sharedPreferences;
+    String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,14 +58,15 @@ public class KategoriActivity extends AppCompatActivity {
                 startActivity(Test1);
             }
         });
+        mApiInterface = ApiClient.getClient().create(ApiInterface.class);
+        sharedPreferences = getApplicationContext().getSharedPreferences("remember", Context.MODE_PRIVATE);
+        token = sharedPreferences.getString("TOKEN", "fail");
 
         initData();
         recyclerViewKategori = (RecyclerView) findViewById(R.id.recyclerview_kategori);
         layoutManager=new LinearLayoutManager(KategoriActivity.this);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
-        adapter= new AdapterKategori(userList);
         recyclerViewKategori.setLayoutManager(layoutManager);
-        recyclerViewKategori.setAdapter(adapter);
 
 
         bottomNavigation = findViewById(R.id.bottom_navigation);
@@ -82,13 +95,22 @@ public class KategoriActivity extends AppCompatActivity {
             }
         });
     }
+
     private void initData() {
-        userList = new ArrayList<>();
-        userList.add(new Kategori(R.drawable.top_background1,"Kaos Polos"));
-        userList.add(new Kategori(R.drawable.top_background1,"Seragam"));
-        userList.add(new Kategori(R.drawable.top_background1,"PDH"));
-        userList.add(new Kategori(R.drawable.top_background1,"Jaket"));
-        userList.add(new Kategori(R.drawable.top_background1,"Hem"));
-        userList.add(new Kategori(R.drawable.top_background1,"atribut"));
+        Call<GetProductCategory> getProductCategoryCall = mApiInterface.getCategory("Bearer "+token);
+        getProductCategoryCall.enqueue(new Callback<GetProductCategory>() {
+            @Override
+            public void onResponse(Call<GetProductCategory> call, Response<GetProductCategory> response) {
+                productCategories=response.body().getListProductCategory();
+
+                Log.d("RES",productCategories.get(0).getNama());
+                adapter= new AdapterKategori(productCategories);
+                recyclerViewKategori.setAdapter(adapter);
+            }
+            @Override
+            public void onFailure(Call<GetProductCategory> call, Throwable t) {
+
+            }
+        });
     }
 }

@@ -11,12 +11,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.familycollection.R;
 import com.example.familycollection.models.Kategori;
+import com.example.familycollection.models.ProductCategory;
 
 import java.util.List;
 
 public class AdapterKategori extends RecyclerView.Adapter<AdapterKategori.MyViewHolder> {
-    private List<Kategori> userList;
-    public AdapterKategori (List<Kategori>userList){this.userList=userList;}
+    private List<ProductCategory> productCategoryList;
+    public AdapterKategori (List<ProductCategory>productCategoryList){this.productCategoryList=productCategoryList;}
 
     @NonNull
     @Override
@@ -28,9 +29,9 @@ public class AdapterKategori extends RecyclerView.Adapter<AdapterKategori.MyView
 
     @Override
     public void onBindViewHolder(@NonNull AdapterKategori.MyViewHolder holder, int position) {
-        Kategori kategori =userList.get(position);
-        holder.fotokategori.setImageResource(kategori.getFotokategori());
-        holder.namakategori.setText(kategori.getNamakategori());
+        ProductCategory productCategory =productCategoryList.get(position);
+//        holder.fotokategori.setImageResource(kategori.getFotokategori());
+        holder.namakategori.setText(productCategory.getNama());
 
 
     }
@@ -38,7 +39,7 @@ public class AdapterKategori extends RecyclerView.Adapter<AdapterKategori.MyView
     @Override
     public int getItemCount() {
 
-        return userList.size();
+        return (productCategoryList == null) ? 0 : productCategoryList.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
