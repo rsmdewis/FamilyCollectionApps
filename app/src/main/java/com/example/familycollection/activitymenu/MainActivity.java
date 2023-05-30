@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void initData() {
-        Call<GetProduct> getProductCall = mApiInterface.getProduct("1","Bearer "+token);
+        Call<GetProduct> getProductCall = mApiInterface.getProduct("","Bearer "+token);
         getProductCall.enqueue(new Callback<GetProduct>() {
             @Override
             public void onResponse(Call<GetProduct> call, Response<GetProduct> response) {
