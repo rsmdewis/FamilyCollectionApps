@@ -86,8 +86,12 @@ public class LoginActivity extends AppCompatActivity {
                             akuns.add(response.body().getListDataAkun());
                             Toast.makeText(LoginActivity.this, "Berhasil Login", Toast.LENGTH_LONG).show();
                             String token=response.body().getToken();
+                            String id=akuns.get(0).getId();
+
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             editor.putString("TOKEN", token);
+                            editor.putString("USER_ID", id);
+
                             editor.apply();
                             startActivity(intent);
                             finish();

@@ -2,6 +2,9 @@ package com.example.familycollection.RestApi;
 
 
 import com.example.familycollection.Model.GetAkun;
+import com.example.familycollection.models.AddCart;
+import com.example.familycollection.models.DeleteCart;
+import com.example.familycollection.models.GetCart;
 import com.example.familycollection.models.GetProduct;
 import com.example.familycollection.models.GetProductCategory;
 
@@ -25,5 +28,17 @@ public interface ApiInterface {
 
     @GET("product/category")
     Call<GetProductCategory> getCategory(@Header("Authorization") String auth);
+
+    @GET("cart")
+    Call<GetCart> getCart(@Query("user_id") String user_id, @Header("Authorization") String auth);
+
+    @GET("cart/delete")
+    Call<DeleteCart> deleteCart(@Query("id") String id, @Header("Authorization") String auth);
+
+    @FormUrlEncoded
+    @POST("cart/add")
+    Call<AddCart> postCart(@Header("Authorization") String auth,
+                           @Field("user_id") String user_id,
+                            @Field("product_id") String product_id);
 
 }

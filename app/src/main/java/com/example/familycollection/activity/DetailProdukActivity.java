@@ -3,7 +3,10 @@ package com.example.familycollection.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,8 +14,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.familycollection.LoginActivity;
 import com.example.familycollection.R;
+import com.example.familycollection.RestApi.ApiClient;
+import com.example.familycollection.RestApi.ApiInterface;
+import com.example.familycollection.models.AddCart;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DetailProdukActivity extends AppCompatActivity {
 
@@ -22,6 +34,13 @@ public class DetailProdukActivity extends AppCompatActivity {
     LinearLayout layoutFooter;
     RelativeLayout btnKeranjang, btnBeli;
     Intent mIntent;
+    SharedPreferences sharedPreferences;
+    String user_id,token;
+    ApiInterface mApiInterface;
+    ProgressDialog progressDialog;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +50,6 @@ public class DetailProdukActivity extends AppCompatActivity {
         imgProduk = (ImageView) findViewById(R.id.image_produk);
         textNama = (TextView) findViewById(R.id.tv_nama);
         textHarga = (TextView) findViewById(R.id.tv_harga);
-        textBahan = (TextView) findViewById(R.id.tv_bahan);
         textBerat = (TextView) findViewById(R.id.tv_berat);
         textUkuran = (TextView) findViewById(R.id.tv_ukuran);
         textEmail = (TextView) findViewById(R.id.tv_emailfc);
@@ -40,18 +58,56 @@ public class DetailProdukActivity extends AppCompatActivity {
         layoutFooter = (LinearLayout) findViewById(R.id.div_footer);
         btnKeranjang = (RelativeLayout) findViewById(R.id.btn_keranjang);
         btnBeli = (RelativeLayout) findViewById(R.id.btn_beli);
+        sharedPreferences = getApplicationContext().getSharedPreferences("remember", Context.MODE_PRIVATE);
+        user_id = sharedPreferences.getString("USER_ID", "fail");
+        token = sharedPreferences.getString("TOKEN", "fail");
 
+
+        mApiInterface = ApiClient.getClient().create(ApiInterface.class);
         mIntent=getIntent();
 
         textNama.setText(mIntent.getStringExtra("nama"));
         textHarga.setText("Rp. "+mIntent.getStringExtra("harga"));
         textDeskripsi.setText(mIntent.getStringExtra("deskripsi"));
 
+        progressDialog = new ProgressDialog(DetailProdukActivity.this);
+        progressDialog.setMessage("Tunggu sebentar... ");
+        progressDialog.setIndeterminate(false);
+        progressDialog.setCancelable(true);
+
         btnKeranjang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent Test1 = new Intent(getApplicationContext(), CartActivity.class);
                 startActivity(Test1);
+            }
+        });
+
+        btnBeli.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addCart();
+            }
+        });
+    }
+    private void addCart() {
+        progressDialog.show();
+        Call<AddCart> addCartCall=mApiInterface.postCart("Bearer "+token,user_id,mIntent.getStringExtra("id"));
+        addCartCall.enqueue(new Callback<AddCart>() {
+            @Override
+            public void onResponse(Call<AddCart> call, Response<AddCart> response) {
+                progressDialog.dismiss();
+                Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_LONG).show();
+                if(response.body().getSuccess().equals(true)){
+                    Intent Test1 = new Intent(getApplicationContext(), CartActivity.class);
+                    startActivity(Test1);
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<AddCart> call, Throwable t) {
+                Log.d("ERR",""+t);
             }
         });
     }
