@@ -66,14 +66,14 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Bahan"
+                                android:text="Ukuran"
                                 android:textColor="@color/colorPrimary" />
 
                             <TextView
-                                android:id="@+id/tv_bahan"
+                                android:id="@+id/tv_ukuran"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="L99ASD844"
+                                android:text="S, M, L, XL, XXL"
                                 android:textColor="#657191"
                                 android:textSize="13dp" />
                         </LinearLayout>
@@ -113,20 +113,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="#ECECEC" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Ukuran"
-                        android:textColor="@color/colorPrimary" />
-
-                    <TextView
-                        android:id="@+id/tv_ukuran"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="S, M, L, XL, XXL"
-                        android:textColor="#657191"
-                        android:textSize="13dp" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

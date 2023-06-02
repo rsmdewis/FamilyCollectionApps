@@ -14,6 +14,9 @@ public class Product {
     @SerializedName("gambar")
     private String gambar;
 
+    @SerializedName("weight")
+    private String weight;
+
     public String getId() {
         return id;
     }
@@ -52,5 +55,13 @@ public class Product {
 
     public void setGambar(String gambar) {
         this.gambar = gambar;
+    }
+
+    public String getWeight() {
+        return weight;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight;
     }
 }

@@ -1,5 +1,6 @@
 package com.example.familycollection.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.familycollection.R;
+import com.example.familycollection.activity.DetailProdukActivity;
+import com.example.familycollection.activity.ProdukActivity;
 import com.example.familycollection.models.Kategori;
 import com.example.familycollection.models.ProductCategory;
 
@@ -32,6 +35,14 @@ public class AdapterKategori extends RecyclerView.Adapter<AdapterKategori.MyView
         ProductCategory productCategory =productCategoryList.get(position);
 //        holder.fotokategori.setImageResource(kategori.getFotokategori());
         holder.namakategori.setText(productCategory.getNama());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mIntent = new Intent(view.getContext(), ProdukActivity.class);
+                mIntent.putExtra("id",productCategoryList.get(position).getId());
+                view.getContext().startActivity(mIntent);
+            }
+        });
 
 
     }
