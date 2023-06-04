@@ -56,7 +56,6 @@ public class DetailProdukActivity extends AppCompatActivity {
         textDeskripsi = (TextView) findViewById(R.id.tv_deskripsi);
         recyclerViewProduk = (RecyclerView) findViewById(R.id.rv_produk);
         layoutFooter = (LinearLayout) findViewById(R.id.div_footer);
-        btnKeranjang = (RelativeLayout) findViewById(R.id.btn_keranjang);
         btnBeli = (RelativeLayout) findViewById(R.id.btn_beli);
         sharedPreferences = getApplicationContext().getSharedPreferences("remember", Context.MODE_PRIVATE);
         user_id = sharedPreferences.getString("USER_ID", "fail");

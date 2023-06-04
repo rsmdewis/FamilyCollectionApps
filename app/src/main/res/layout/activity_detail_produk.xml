@@ -190,31 +190,18 @@
             android:paddingHorizontal="15dp"
             android:paddingVertical="10dp">
 
-            <RelativeLayout
-                android:id="@+id/btn_keranjang"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    app:srcCompat="@drawable/ic_keranjang" />
-
-            </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/btn_beli"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="15dp"
                 android:background="@drawable/login_button_bk">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="Beli Sekarang"
+                    android:text="Pesan Sekarang"
                     android:textColor="@color/white"
                     android:textSize="15dp"
                     android:textStyle="bold" />

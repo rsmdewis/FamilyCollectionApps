@@ -43,13 +43,20 @@
                     android:maxLines="3"
                     android:text="Nama Produk"
                     android:textColor="@color/colorPrimary" />
+                <TextView
+                    android:id="@+id/tv_ukuran"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="L"
+                    android:textSize="12dp" />
 
                 <TextView
                     android:id="@+id/tv_berat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="1kg"
+                    android:text="200 (gram)"
                     android:textSize="12dp" />
 
                 <RelativeLayout

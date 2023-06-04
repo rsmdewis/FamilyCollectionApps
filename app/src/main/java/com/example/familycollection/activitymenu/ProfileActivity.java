@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -27,33 +28,25 @@ import com.google.android.material.navigation.NavigationBarView;
 
 public class ProfileActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigation;
-
-    CardView cdProfile;
-    LinearLayout layout1, layout2, layout3;
-    RelativeLayout rlEditProfile, rlRiwayat, rlAlamat, rlTentang, rlHelp, btnCart;
-    ImageView imageProfile, imageBg;
+    LinearLayout layout1, layout3;
+    RelativeLayout rlEditProfile, rlRiwayat, rlTentang, rlHelp, btnCart;
+    Button btnLogout;
     TextView textNama, textEmail, textLogout;
-    Switch switchNontification;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        cdProfile = (CardView) findViewById(R.id.cd_profile);
-        imageProfile = (ImageView) findViewById(R.id.img_profil);
         textNama = (TextView) findViewById(R.id.tv_nama);
         textEmail = (TextView) findViewById(R.id.tv_email);
-        textLogout = (TextView) findViewById(R.id.btn_logout);
+        btnLogout = (Button) findViewById(R.id.btn_logout);
         layout1 = (LinearLayout) findViewById(R.id.linearlayout);
-        layout2 = (LinearLayout) findViewById(R.id.linearlayout2);
         layout3 = (LinearLayout) findViewById(R.id.linearlayout3);
         rlEditProfile = (RelativeLayout) findViewById(R.id.btn_editProfile);
         rlRiwayat = (RelativeLayout) findViewById(R.id.btn_riwayat);
-        rlAlamat = (RelativeLayout) findViewById(R.id.btn_settingAlamat);
         rlTentang = (RelativeLayout) findViewById(R.id.btn_tentang);
         rlHelp = (RelativeLayout) findViewById(R.id.btn_help);
-        switchNontification = (Switch) findViewById(R.id.swt_notif);
         btnCart = (RelativeLayout) findViewById(R.id.btn_Keranjang);
         btnCart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,13 +67,6 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent Test1 = new Intent(getApplicationContext(), RiwayatActivity.class);
-                startActivity(Test1);
-            }
-        });
-        rlAlamat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent Test1 = new Intent(getApplicationContext(), ListAlamatActivity.class);
                 startActivity(Test1);
             }
         });
