@@ -87,10 +87,15 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(LoginActivity.this, "Berhasil Login", Toast.LENGTH_LONG).show();
                             String token=response.body().getToken();
                             String id=akuns.get(0).getId();
+                            String nama=akuns.get(0).getName();
+                            String email=akuns.get(0).getEmail();
+
 
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             editor.putString("TOKEN", token);
                             editor.putString("USER_ID", id);
+                            editor.putString("NAMA", nama);
+                            editor.putString("EMAIL", email);
 
                             editor.apply();
                             startActivity(intent);

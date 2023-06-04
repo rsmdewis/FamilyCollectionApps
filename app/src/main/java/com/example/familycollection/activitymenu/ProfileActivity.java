@@ -1,6 +1,8 @@
 package com.example.familycollection.activitymenu;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,12 +36,17 @@ public class ProfileActivity extends AppCompatActivity {
     ImageView imageProfile, imageBg;
     TextView textNama, textEmail, textLogout;
     Switch switchNontification;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+
+        sharedPreferences = getApplicationContext().getSharedPreferences("remember", Context.MODE_PRIVATE);
+        String nama = sharedPreferences.getString("NAMA", "-");
+        String email = sharedPreferences.getString("EMAIL", "-");
         cdProfile = (CardView) findViewById(R.id.cd_profile);
         imageProfile = (ImageView) findViewById(R.id.img_profil);
         textNama = (TextView) findViewById(R.id.tv_nama);
@@ -55,6 +62,9 @@ public class ProfileActivity extends AppCompatActivity {
         rlHelp = (RelativeLayout) findViewById(R.id.btn_help);
         switchNontification = (Switch) findViewById(R.id.swt_notif);
         btnCart = (RelativeLayout) findViewById(R.id.btn_Keranjang);
+
+        textNama.setText(nama);
+        textEmail.setText(email);
         btnCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

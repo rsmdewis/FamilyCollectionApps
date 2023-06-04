@@ -7,6 +7,8 @@ import com.example.familycollection.models.DeleteCart;
 import com.example.familycollection.models.GetCart;
 import com.example.familycollection.models.GetProduct;
 import com.example.familycollection.models.GetProductCategory;
+import com.example.familycollection.models.Register;
+import com.example.familycollection.models.UpdateUser;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -40,5 +42,22 @@ public interface ApiInterface {
     Call<AddCart> postCart(@Header("Authorization") String auth,
                            @Field("user_id") String user_id,
                             @Field("product_id") String product_id);
+
+    @FormUrlEncoded
+    @POST("auth/register")
+    Call<Register> register(@Field("email") String email,
+                            @Field("phone") String phone,
+                            @Field("password") String password,
+                            @Field("name") String name);
+
+    @FormUrlEncoded
+    @POST("auth/update")
+    Call<UpdateUser> updateUser(
+                            @Header("Authorization") String auth,
+                            @Field("id") String id,
+                            @Field("email") String email,
+                            @Field("phone") String phone,
+                            @Field("password") String password,
+                            @Field("name") String name);
 
 }

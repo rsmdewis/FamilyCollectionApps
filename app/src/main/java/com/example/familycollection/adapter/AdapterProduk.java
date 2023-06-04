@@ -15,6 +15,7 @@ import com.example.familycollection.activity.DetailProdukActivity;
 import com.example.familycollection.models.Product;
 import com.example.familycollection.models.Produk;
 import com.example.familycollection.models.ProdukTransaksi;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -33,9 +34,10 @@ public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull AdapterProduk.MyViewHolder holder, int position) {
         Product produk =productList.get(position);
-//        holder.fotoproduk.setImageResource(produk.getFotoproduk());
         holder.namaproduk.setText(produk.getNama());
         holder.harga.setText(produk.getPrice());
+        final String urlGambarBerita = "http://192.168.1.10:8000/storage/" + produk.getGambar();
+        Picasso.get().load(urlGambarBerita).into(holder.fotoproduk);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,6 +47,7 @@ public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.MyViewHold
                 mIntent.putExtra("nama",productList.get(position).getNama());
                 mIntent.putExtra("harga",productList.get(position).getPrice());
                 mIntent.putExtra("deskripsi",productList.get(position).getDeskripsi());
+                mIntent.putExtra("gambar",productList.get(position).getGambar());
                 view.getContext().startActivity(mIntent);
 
             }

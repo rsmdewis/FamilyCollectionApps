@@ -21,6 +21,7 @@ import com.example.familycollection.R;
 import com.example.familycollection.RestApi.ApiClient;
 import com.example.familycollection.RestApi.ApiInterface;
 import com.example.familycollection.models.AddCart;
+import com.squareup.picasso.Picasso;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -65,7 +66,8 @@ public class DetailProdukActivity extends AppCompatActivity {
 
         mApiInterface = ApiClient.getClient().create(ApiInterface.class);
         mIntent=getIntent();
-
+        final String urlGambarBerita = "http://192.168.1.10:8000/storage/" + mIntent.getStringExtra("gambar");
+        Picasso.get().load(urlGambarBerita).into(imgProduk);
         textNama.setText(mIntent.getStringExtra("nama"));
         textHarga.setText("Rp. "+mIntent.getStringExtra("harga"));
         textDeskripsi.setText(mIntent.getStringExtra("deskripsi"));
@@ -98,7 +100,7 @@ public class DetailProdukActivity extends AppCompatActivity {
             public void onResponse(Call<AddCart> call, Response<AddCart> response) {
                 progressDialog.dismiss();
                 Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_LONG).show();
-                if(response.body().getSuccess().equals(true)){
+                if(response.body().getSuccess().equals("true")){
                     Intent Test1 = new Intent(getApplicationContext(), CartActivity.class);
                     startActivity(Test1);
                 }

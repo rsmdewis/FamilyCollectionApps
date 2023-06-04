@@ -22,6 +22,7 @@ import com.example.familycollection.activity.CartActivity;
 import com.example.familycollection.models.Cart;
 import com.example.familycollection.models.DeleteCart;
 import com.example.familycollection.models.Pesan;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -67,7 +68,8 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.MyViewHolder> 
         holder.tv_berat.setText(cart.getListProduct().getWeight() + " Gram");
         holder.tv_harga.setText("Rp. "+cart.getListProduct().getPrice());
         holder.tv_totalHarga.setText("Rp. "+cart.getListProduct().getPrice());
-
+        final String urlGambarBerita = "http://192.168.1.10:8000/storage/" + cart.getListProduct().getGambar();
+        Picasso.get().load(urlGambarBerita).into(holder.img_produk);
         holder.btn_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -103,7 +105,7 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.MyViewHolder> 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView namaproduk,tv_berat,tv_harga,tv_totalHarga;
-        private ImageView btn_delete;
+        private ImageView btn_delete,img_produk;
 
 
         public MyViewHolder(@NonNull View itemView) {
@@ -113,6 +115,7 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.MyViewHolder> 
             tv_harga = itemView.findViewById(R.id.tv_harga);
             tv_totalHarga = itemView.findViewById(R.id.tv_totalHarga);
             btn_delete = itemView.findViewById(R.id.btn_delete);
+            img_produk = itemView.findViewById(R.id.img_produk);
 
         }
     }

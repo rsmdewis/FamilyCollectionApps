@@ -9,7 +9,7 @@ public class Akun {
     @SerializedName("name")
     private String name;
     @SerializedName("email")
-    private String password;
+    private String email;
 
 
     public String getId() {
@@ -28,11 +28,11 @@ public class Akun {
         this.name = name;
     }
 
-    public String getPassword() {
-        return password;
+    public String getEmail() {
+        return email;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
