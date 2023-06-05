@@ -84,7 +84,7 @@ public class OrderActivity extends AppCompatActivity {
     }
     private void initPesan() {
         userList = new ArrayList<>();
-        userList.add(new Pesan("Kaos Polos","24 Mei 2023","1000000", "5", "success"));
+        userList.add(new Pesan("Jaket Reglan","4 Juni 2023","96000", "1", "Diterima"));
     }
 //    }
 }

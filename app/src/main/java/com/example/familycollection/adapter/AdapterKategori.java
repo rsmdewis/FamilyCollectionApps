@@ -54,11 +54,9 @@ public class AdapterKategori extends RecyclerView.Adapter<AdapterKategori.MyView
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        private ImageView fotokategori;
         private TextView namakategori;
         public MyViewHolder(@NonNull View itemView){
             super(itemView);
-            fotokategori=itemView.findViewById(R.id.image);
             namakategori=itemView.findViewById(R.id.tv_nama);
         }
 

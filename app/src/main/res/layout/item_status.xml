@@ -33,7 +33,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="marquee"
-                    android:text="Nama"
+                    android:text="Jaket Reglan"
                     android:textColor="@color/black"
                     android:textStyle="bold" />
 
@@ -42,7 +42,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
-                    android:text="6 jun 2020"
+                    android:text="4 jun 2023"
                     android:textColor="@color/black"
                     android:textSize="11dp" />
 
@@ -61,7 +61,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="marquee"
-                    android:text="Rp.10.000"
+                    android:text="Rp.96.000"
                     android:textColor="@color/black"
                     android:textStyle="bold" />
 
