@@ -96,7 +96,7 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity(Test1);
             }
         });
-        textLogout.setOnClickListener(new View.OnClickListener() {
+        btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent Test1 = new Intent(getApplicationContext(), LoginActivity.class);

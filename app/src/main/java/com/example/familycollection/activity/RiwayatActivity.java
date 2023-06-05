@@ -11,6 +11,7 @@ import com.example.familycollection.R;
 import com.example.familycollection.activitymenu.OrderActivity;
 import com.example.familycollection.adapter.AdapterStatus;
 import com.example.familycollection.models.Pesan;
+import com.example.familycollection.models.Transaction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,7 @@ public class RiwayatActivity extends AppCompatActivity {
 
     RecyclerView recyclerViewRiwayat;
     LinearLayoutManager layoutManager;
-    List<Pesan> userList;
+    List<Transaction> transactionList;
     AdapterStatus adapter1;
 
     @Override
@@ -31,12 +32,11 @@ public class RiwayatActivity extends AppCompatActivity {
 
         layoutManager=new LinearLayoutManager(RiwayatActivity.this);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
-        adapter1= new AdapterStatus(userList);
+        adapter1= new AdapterStatus(transactionList);
         recyclerViewRiwayat.setLayoutManager(layoutManager);
         recyclerViewRiwayat.setAdapter(adapter1);
     }
     private void initRiwayat() {
-        userList = new ArrayList<>();
-        userList.add(new Pesan("Kaos Polos","24 Mei 2023","1000000", "5", "success"));
+
     }
 }

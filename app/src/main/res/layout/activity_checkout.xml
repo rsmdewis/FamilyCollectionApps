@@ -42,6 +42,12 @@
                             android:text="Tambah Keterangan Pesanan"
                             android:textStyle="bold"
                             android:textColor="@color/colorPrimary" />
+                        <ImageView
+                            android:id="@+id/image_keterangan"
+                            android:layout_width="match_parent"
+                            android:layout_height="240dp"
+                            android:background="@color/white"
+                            android:src="@drawable/top_background1" />
                         <Button
                             android:id="@+id/foto_tambahan"
                             android:layout_width="match_parent"
@@ -122,13 +128,14 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/spinner_jasa"
-                                android:layout_marginTop="10dp"
+                                android:entries="@array/list_pengiriman"
                                 android:spinnerMode="dropdown"/>
                         </LinearLayout>
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/card_pengiriman"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
@@ -174,7 +181,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:background="@drawable/bg_profile2"
-                            android:visibility="gone">
+                            >
 
                             <Spinner
                                 android:id="@+id/spn_provinsi"
@@ -191,7 +198,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:background="@drawable/bg_profile2"
-                            android:visibility="gone">
+                           >
 
                             <Spinner
                                 android:id="@+id/spn_kota"
@@ -202,12 +209,12 @@
 
                         </RelativeLayout>
 
-                        <ProgressBar
-                            android:id="@+id/pb"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="10dp" />
+<!--                        <ProgressBar-->
+<!--                            android:id="@+id/pb"-->
+<!--                            android:layout_width="30dp"-->
+<!--                            android:layout_height="30dp"-->
+<!--                            android:layout_gravity="center_horizontal"-->
+<!--                            android:layout_marginTop="10dp" />-->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -222,10 +229,10 @@
                                 android:textSize="15dp"
                                 android:padding="10dp"/>
                             <androidx.appcompat.widget.AppCompatSpinner
+                                android:entries="@array/list_courier"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/spinner_kurir"
-                                android:layout_marginTop="10dp"
                                 android:spinnerMode="dropdown"/>
                         </LinearLayout>
 

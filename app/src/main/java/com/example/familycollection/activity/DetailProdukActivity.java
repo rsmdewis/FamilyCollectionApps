@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +40,7 @@ public class DetailProdukActivity extends AppCompatActivity {
     String user_id,token;
     ApiInterface mApiInterface;
     ProgressDialog progressDialog;
+    Spinner spinner_size;
 
 
 
@@ -52,7 +54,7 @@ public class DetailProdukActivity extends AppCompatActivity {
         textNama = (TextView) findViewById(R.id.tv_nama);
         textHarga = (TextView) findViewById(R.id.tv_harga);
         textBerat = (TextView) findViewById(R.id.tv_berat);
-        textUkuran = (TextView) findViewById(R.id.tv_ukuran);
+        spinner_size = findViewById(R.id.spinner_size);
         textEmail = (TextView) findViewById(R.id.tv_emailfc);
         textDeskripsi = (TextView) findViewById(R.id.tv_deskripsi);
         recyclerViewProduk = (RecyclerView) findViewById(R.id.rv_produk);
@@ -76,14 +78,6 @@ public class DetailProdukActivity extends AppCompatActivity {
         progressDialog.setIndeterminate(false);
         progressDialog.setCancelable(true);
 
-        btnKeranjang.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent Test1 = new Intent(getApplicationContext(), CartActivity.class);
-                startActivity(Test1);
-            }
-        });
-
         btnBeli.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,7 +87,7 @@ public class DetailProdukActivity extends AppCompatActivity {
     }
     private void addCart() {
         progressDialog.show();
-        Call<AddCart> addCartCall=mApiInterface.postCart("Bearer "+token,user_id,mIntent.getStringExtra("id"));
+        Call<AddCart> addCartCall=mApiInterface.postCart("Bearer "+token,user_id,mIntent.getStringExtra("id"),""+spinner_size.getSelectedItem());
         addCartCall.enqueue(new Callback<AddCart>() {
             @Override
             public void onResponse(Call<AddCart> call, Response<AddCart> response) {

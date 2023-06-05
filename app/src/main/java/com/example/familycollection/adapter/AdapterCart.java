@@ -65,6 +65,7 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.MyViewHolder> 
     public void onBindViewHolder(@NonNull AdapterCart.MyViewHolder holder, int position) {
         Cart cart =cartList.get(position);
         holder.namaproduk.setText(cart.getListProduct().getNama());
+        holder.tv_ukuran.setText(cart.getSize());
         holder.tv_berat.setText(cart.getListProduct().getWeight() + " Gram");
         holder.tv_harga.setText("Rp. "+cart.getListProduct().getPrice());
         holder.tv_totalHarga.setText("Rp. "+cart.getListProduct().getPrice());
@@ -104,13 +105,14 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.MyViewHolder> 
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        private TextView namaproduk,tv_berat,tv_harga,tv_totalHarga;
+        private TextView namaproduk,tv_berat,tv_harga,tv_totalHarga,tv_ukuran;
         private ImageView btn_delete,img_produk;
 
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             namaproduk = itemView.findViewById(R.id.tv_nama);
+            tv_ukuran = itemView.findViewById(R.id.tv_ukuran);
             tv_berat = itemView.findViewById(R.id.tv_berat);
             tv_harga = itemView.findViewById(R.id.tv_harga);
             tv_totalHarga = itemView.findViewById(R.id.tv_totalHarga);

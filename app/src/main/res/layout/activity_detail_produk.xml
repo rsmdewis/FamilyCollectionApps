@@ -69,13 +69,13 @@
                                 android:text="Ukuran"
                                 android:textColor="@color/colorPrimary" />
 
-                            <TextView
-                                android:id="@+id/tv_ukuran"
+                            <Spinner
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="S, M, L, XL, XXL"
-                                android:textColor="#657191"
-                                android:textSize="13dp" />
+                                android:id="@+id/spinner_size"
+                                android:layout_marginTop="10dp"
+                                android:entries="@array/daftar_ukuran"
+                                android:spinnerMode="dropdown"/>
                         </LinearLayout>
                         <LinearLayout
                             android:layout_width="0dp"

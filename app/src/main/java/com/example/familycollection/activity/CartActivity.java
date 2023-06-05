@@ -77,7 +77,7 @@ public class CartActivity extends AppCompatActivity implements AdapterCart.IMeth
         textViewBayar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent Test1 = new Intent(getApplicationContext(), TransaksiActivity.class);
+                Intent Test1 = new Intent(getApplicationContext(), CheckoutActivity.class);
                 startActivity(Test1);
             }
         });

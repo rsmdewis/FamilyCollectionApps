@@ -15,6 +15,9 @@ public class Cart {
     @SerializedName("product_id")
     private String product_id;
 
+    @SerializedName("size")
+    private String size;
+
     @SerializedName("product")
     private Product listProduct=null;
 
@@ -48,5 +51,13 @@ public class Cart {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
     }
 }

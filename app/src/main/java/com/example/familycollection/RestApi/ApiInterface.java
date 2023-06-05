@@ -5,9 +5,13 @@ import com.example.familycollection.Model.GetAkun;
 import com.example.familycollection.models.AddCart;
 import com.example.familycollection.models.DeleteCart;
 import com.example.familycollection.models.GetCart;
+import com.example.familycollection.models.GetCity;
 import com.example.familycollection.models.GetProduct;
 import com.example.familycollection.models.GetProductCategory;
+import com.example.familycollection.models.GetProvince;
+import com.example.familycollection.models.GetTransaction;
 import com.example.familycollection.models.Register;
+import com.example.familycollection.models.ShowOrder;
 import com.example.familycollection.models.UpdateUser;
 
 import retrofit2.Call;
@@ -41,7 +45,8 @@ public interface ApiInterface {
     @POST("cart/add")
     Call<AddCart> postCart(@Header("Authorization") String auth,
                            @Field("user_id") String user_id,
-                            @Field("product_id") String product_id);
+                           @Field("product_id") String product_id,
+                           @Field("size") String size);
 
     @FormUrlEncoded
     @POST("auth/register")
@@ -59,5 +64,16 @@ public interface ApiInterface {
                             @Field("phone") String phone,
                             @Field("password") String password,
                             @Field("name") String name);
+    @GET("transaction/history")
+    Call<GetTransaction> getTransaction(@Query("user_id") String user_id, @Header("Authorization") String auth);
+
+    @GET("transaction/show")
+    Call<ShowOrder> showOrder(@Query("code") String code, @Header("Authorization") String auth);
+
+    @GET("ongkir/province")
+    Call<GetProvince> getProvince();
+    @GET("ongkir/city")
+    Call<GetCity> getCity(@Query("province_id") String province_id);
+
 
 }

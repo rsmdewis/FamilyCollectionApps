@@ -20,4 +20,21 @@
     <string name="order">Order</string>
     <string name="profil">Profile</string>
     <string name="kategori">Kategori</string>
+
+    <string-array name="daftar_ukuran">
+        <item>S</item>
+        <item>M</item>
+        <item>L</item>
+        <item>XL</item>
+    </string-array>
+
+    <string-array name="list_pengiriman">
+        <item>Ambil Sendiri</item>
+        <item>Kirim Pesanan</item>
+    </string-array>
+    <string-array name="list_courier">
+        <item>jne</item>
+        <item>pos</item>
+        <item>tiki</item>
+    </string-array>
 </resources>

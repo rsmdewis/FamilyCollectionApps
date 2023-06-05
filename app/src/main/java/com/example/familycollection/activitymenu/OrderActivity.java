@@ -1,6 +1,8 @@
 package com.example.familycollection.activitymenu;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,18 +14,26 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.familycollection.R;
+import com.example.familycollection.RestApi.ApiClient;
+import com.example.familycollection.RestApi.ApiInterface;
 import com.example.familycollection.activity.CartActivity;
 import com.example.familycollection.adapter.AdapterBayar;
 import com.example.familycollection.adapter.AdapterKategori;
 import com.example.familycollection.adapter.AdapterPesan;
 import com.example.familycollection.adapter.AdapterStatus;
+import com.example.familycollection.models.GetTransaction;
 import com.example.familycollection.models.Kategori;
 import com.example.familycollection.models.Pesan;
+import com.example.familycollection.models.Transaction;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class OrderActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigation;
@@ -32,8 +42,13 @@ public class OrderActivity extends AppCompatActivity {
 
     RelativeLayout btnCart;
     LinearLayoutManager layoutManager;
-    List<Pesan> userList;
+    List<Transaction> transactionList;
     AdapterStatus adapter1;
+
+    ApiInterface mApiInterface;
+    SharedPreferences sharedPreferences;
+
+    String id,token;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,15 +62,19 @@ public class OrderActivity extends AppCompatActivity {
                 startActivity(Test1);
             }
         });
-        initPesan();
+
 
         layoutManager=new LinearLayoutManager(OrderActivity.this);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
-        adapter1= new AdapterStatus(userList);
+
         recyclerViewStatus.setLayoutManager(layoutManager);
         recyclerViewStatus.setAdapter(adapter1);
+        mApiInterface = ApiClient.getClient().create(ApiInterface.class);
+        sharedPreferences = getApplicationContext().getSharedPreferences("remember", Context.MODE_PRIVATE);
+        token = sharedPreferences.getString("TOKEN", "fail");
+        id = sharedPreferences.getString("USER_ID", "fail");
 
-
+        initPesan();
         bottomNavigation = findViewById(R.id.bottom_navigation);
         bottomNavigation.setSelectedItemId(R.id.navigation_status);
         bottomNavigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -83,8 +102,21 @@ public class OrderActivity extends AppCompatActivity {
         });
     }
     private void initPesan() {
-        userList = new ArrayList<>();
-        userList.add(new Pesan("Kaos Polos","24 Mei 2023","1000000", "5", "success"));
+        Call<GetTransaction> transactionCall= mApiInterface.getTransaction(id,"Bearer "+token);
+        transactionCall.enqueue(new Callback<GetTransaction>() {
+            @Override
+            public void onResponse(Call<GetTransaction> call, Response<GetTransaction> response) {
+                transactionList=response.body().getTransactionList();
+                adapter1= new AdapterStatus(transactionList);
+                recyclerViewStatus.setAdapter(adapter1);
+
+            }
+
+            @Override
+            public void onFailure(Call<GetTransaction> call, Throwable t) {
+
+            }
+        });
     }
 //    }
 }

@@ -1,5 +1,6 @@
 package com.example.familycollection.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,13 +10,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.familycollection.R;
+import com.example.familycollection.activity.CheckoutActivity;
+import com.example.familycollection.activity.DetailProdukActivity;
+import com.example.familycollection.activity.TransaksiActivity;
 import com.example.familycollection.models.Pesan;
+import com.example.familycollection.models.Transaction;
 
 import java.util.List;
 
 public class AdapterStatus extends RecyclerView.Adapter<AdapterStatus.MyViewHolder> {
-    private List<Pesan> userList;
-    public AdapterStatus (List<Pesan>userList){this.userList=userList;}
+    private List<Transaction> transactionList;
+    public AdapterStatus (List<Transaction>transactionList){
+        this.transactionList=transactionList;
+    }
 
     @NonNull
     @Override
@@ -27,12 +34,39 @@ public class AdapterStatus extends RecyclerView.Adapter<AdapterStatus.MyViewHold
 
     @Override
     public void onBindViewHolder(@NonNull AdapterStatus.MyViewHolder holder, int position) {
-        Pesan pesan =userList.get(position);
-        holder.namaproduk.setText(pesan.getNamaproduk());
-        holder.tanggal.setText(pesan.getTanggal());
-        holder.total.setText(pesan.getTotal());
-        holder.jumlah.setText(pesan.getJumlah());
-        holder.status.setText(pesan.getStatus());
+        String status="0";
+        Transaction transaction =transactionList.get(position);
+        holder.namaproduk.setText("Code : "+transaction.getCode());
+        holder.tanggal.setText(transaction.getTanggal());
+        holder.total.setText(transaction.getTotal());
+        switch(transaction.getStatus()) {
+            case "0":
+                status="Pending";
+                break;
+            case "1":
+                status="Lunas";
+                break;
+            case "2":
+                status="Dikirim";
+                break;
+            case "4":
+                status="Diterima";
+                break;
+            default:
+                status="Pending";
+                break;
+        }
+        holder.status.setText(status);
+        holder.jumlah.setText(transaction.getTotal_product()+ " Item");
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mIntent = new Intent(view.getContext(), TransaksiActivity.class);
+                mIntent.putExtra("code",transactionList.get(position).getCode());
+                view.getContext().startActivity(mIntent);
+            }
+        });
 
 
 
@@ -41,7 +75,7 @@ public class AdapterStatus extends RecyclerView.Adapter<AdapterStatus.MyViewHold
     @Override
     public int getItemCount() {
 
-        return userList.size();
+        return (transactionList == null) ? 0 : transactionList.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
