@@ -17,6 +17,9 @@ public class Transaction {
     @SerializedName("total_product")
     private String total_product;
 
+    @SerializedName("pengiriman")
+    private String pengiriman;
+
     public String getId() {
         return id;
     }
@@ -63,5 +66,13 @@ public class Transaction {
 
     public void setTotal_product(String total_product) {
         this.total_product = total_product;
+    }
+
+    public String getPengiriman() {
+        return pengiriman;
+    }
+
+    public void setPengiriman(String pengiriman) {
+        this.pengiriman = pengiriman;
     }
 }

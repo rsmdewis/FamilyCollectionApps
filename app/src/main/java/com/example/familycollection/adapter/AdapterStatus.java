@@ -35,6 +35,7 @@ public class AdapterStatus extends RecyclerView.Adapter<AdapterStatus.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull AdapterStatus.MyViewHolder holder, int position) {
         String status="0";
+        String pengiriman="0";
         Transaction transaction =transactionList.get(position);
         holder.namaproduk.setText("Code : "+transaction.getCode());
         holder.tanggal.setText(transaction.getTanggal());
@@ -56,7 +57,20 @@ public class AdapterStatus extends RecyclerView.Adapter<AdapterStatus.MyViewHold
                 status="Pending";
                 break;
         }
+
+        switch(transaction.getPengiriman()) {
+            case "1":
+                pengiriman="Kirim Pesanan";
+                break;
+            case "2":
+                pengiriman="Ambil Sendiri";
+                break;
+            default:
+                pengiriman="Ambil Sendiri";
+                break;
+        }
         holder.status.setText(status);
+        holder.tv_pengiriman.setText(pengiriman);
         holder.jumlah.setText(transaction.getTotal_product()+ " Item");
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -83,7 +97,7 @@ public class AdapterStatus extends RecyclerView.Adapter<AdapterStatus.MyViewHold
         private TextView tanggal;
         private TextView total;
         private TextView jumlah;
-        private TextView status;
+        private TextView status,tv_pengiriman;
 //        private TextView detail;
 
 
@@ -94,6 +108,7 @@ public class AdapterStatus extends RecyclerView.Adapter<AdapterStatus.MyViewHold
             total=itemView.findViewById(R.id.tv_total);
             jumlah=itemView.findViewById(R.id.tv_jumlah);
             status=itemView.findViewById(R.id.tv_status);
+            tv_pengiriman=itemView.findViewById(R.id.tv_pengiriman);
 //            detail=itemView.findViewById(R.id.btn_detail);
         }
 

@@ -16,13 +16,17 @@ public class GetCart {
     @SerializedName("total")
     String total;
 
+    @SerializedName("weight")
+    String weight;
+
     public GetCart() {
     }
 
-    public GetCart(String success, List<Cart> cartList, String total) {
+    public GetCart(String success, List<Cart> cartList, String total, String weight) {
         this.success = success;
         this.cartList = cartList;
         this.total = total;
+        this.weight = weight;
     }
 
     public String getSuccess() {
@@ -47,5 +51,13 @@ public class GetCart {
 
     public void setTotal(String total) {
         this.total = total;
+    }
+
+    public String getWeight() {
+        return weight;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight;
     }
 }

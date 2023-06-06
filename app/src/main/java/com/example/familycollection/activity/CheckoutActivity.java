@@ -15,9 +15,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -37,20 +39,28 @@ import com.example.familycollection.R;
 import com.example.familycollection.RestApi.ApiClient;
 import com.example.familycollection.RestApi.ApiInterface;
 import com.example.familycollection.activitymenu.OrderActivity;
+import com.example.familycollection.activitymenu.ProfileActivity;
 import com.example.familycollection.adapter.AdapterCart;
 import com.example.familycollection.adapter.AdapterProdukTransaksi;
+import com.example.familycollection.models.AddCheckout;
 import com.example.familycollection.models.Cart;
 import com.example.familycollection.models.City;
 import com.example.familycollection.models.GetCart;
 import com.example.familycollection.models.GetCity;
 import com.example.familycollection.models.GetProvince;
+import com.example.familycollection.models.OngkirCost;
 import com.example.familycollection.models.ProdukTransaksi;
 import com.example.familycollection.models.Province;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -67,6 +77,7 @@ public class CheckoutActivity extends AppCompatActivity implements AdapterCart.I
     LinearLayoutManager layoutManager;
     List<Cart> cartList;
     List<Province> provinceList;
+    List<City> cityList;
 
     AdapterCart adapter;
 
@@ -84,6 +95,12 @@ public class CheckoutActivity extends AppCompatActivity implements AdapterCart.I
     String id,token;
     ImageView imageKeterangan;
     ProgressDialog progressDialog;
+
+    String origin,destination,weight,totalBelanja,ongkir,part_image,jasa="2";
+    MultipartBody.Part fileToUpload;
+    File finalFile;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,8 +139,7 @@ public class CheckoutActivity extends AppCompatActivity implements AdapterCart.I
         btnpesan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent Test1 = new Intent(getApplicationContext(), OrderActivity.class);
-                startActivity(Test1);
+                _checkout();
             }
         });
 
@@ -147,8 +163,10 @@ public class CheckoutActivity extends AppCompatActivity implements AdapterCart.I
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 if (parentView.getItemAtPosition(position).toString().equals("Kirim Pesanan")){
+                    jasa="1";
                     cardPengiriman.setVisibility(View.VISIBLE);
                 }else{
+                    jasa="2";
                     cardPengiriman.setVisibility(View.GONE);
                 }
             }
@@ -167,6 +185,25 @@ public class CheckoutActivity extends AppCompatActivity implements AdapterCart.I
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
                 // your code here
+            }
+        });
+
+        spinnerKota.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                destination=cityList.get(position).getCity_id();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+        });
+
+        cekOngkir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                _cekOngkkir();
             }
         });
 
@@ -189,15 +226,39 @@ public class CheckoutActivity extends AppCompatActivity implements AdapterCart.I
             filePath = data.getData();
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                // Get the image file URI
+                String[] imageProjection = {MediaStore.Images.Media.DATA};
+                Cursor cursor = getContentResolver().query(filePath, imageProjection, null, null, null);
+                if(cursor != null) {
+                    cursor.moveToFirst();
+                    int indexImage = cursor.getColumnIndex(imageProjection[0]);
+                    part_image = cursor.getString(indexImage);
+                }
+                Uri tempUri = getImageUri(getApplicationContext(), bitmap);
+                Log.d("PATH",getRealPathFromURI(tempUri));
+                finalFile = new File(getRealPathFromURI(tempUri));
                 imageKeterangan.setImageBitmap(bitmap);
+
 
             } catch(IOException e) {
                 e.printStackTrace();
             }
         }
     }
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+
+    public String getRealPathFromURI(Uri uri) {
+        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+        cursor.moveToFirst();
+        int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+        return cursor.getString(idx);
+    }
     public void loadData(){
-        Log.d("HERE","DISINI");
         Call<GetCart> getCartCall=mApiInterface.getCart(id,"Bearer "+token);
         getCartCall.enqueue(new Callback<GetCart>() {
             @Override
@@ -206,6 +267,11 @@ public class CheckoutActivity extends AppCompatActivity implements AdapterCart.I
                 adapter= new AdapterCart(cartList,getApplicationContext(),CheckoutActivity.this);
                 recyclerViewProduk.setLayoutManager(layoutManager);
                 recyclerViewProduk.setAdapter(adapter);
+                weight=response.body().getWeight();
+                totalBelanja=response.body().getTotal();
+                textTotalBelanja.setText(response.body().getTotal());
+                textTotal.setText(response.body().getTotal());
+
             }
 
             @Override
@@ -221,7 +287,7 @@ public class CheckoutActivity extends AppCompatActivity implements AdapterCart.I
         getCityCall.enqueue(new Callback<GetCity>() {
             @Override
             public void onResponse(Call<GetCity> call, Response<GetCity> response) {
-                List<City> cityList=response.body().getCityList();
+                cityList=response.body().getCityList();
                 List<String> listSpinner = new ArrayList<String>();
 
                 for (int i = 0; i < cityList.size(); i++){
@@ -260,6 +326,49 @@ public class CheckoutActivity extends AppCompatActivity implements AdapterCart.I
             @Override
             public void onFailure(Call<GetProvince> call, Throwable t) {
 
+            }
+        });
+    }
+
+    private void _cekOngkkir(){
+        Call<OngkirCost> ongkirCostCall=mApiInterface.cekOngkir("Bearer "+token,"160",destination,weight,spinnerKurir.getSelectedItem().toString());
+        ongkirCostCall.enqueue(new Callback<OngkirCost>() {
+            @Override
+            public void onResponse(Call<OngkirCost> call, Response<OngkirCost> response) {
+                textOngkir.setText(response.body().getCost());
+                Integer total=Integer.parseInt(response.body().getCost())+Integer.parseInt(totalBelanja);
+                ongkir=response.body().getCost();
+                textTotal.setText(total.toString());
+
+            }
+
+            @Override
+            public void onFailure(Call<OngkirCost> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void _checkout(){
+        RequestBody reqBody = RequestBody.create(MediaType.parse("multipart/form-file"), finalFile);
+        MultipartBody.Part partImage = MultipartBody.Part.createFormData("image", finalFile.getName(), reqBody);
+        Call<AddCheckout> checkoutCall;
+        if(jasa.equals("1")){
+            checkoutCall=mApiInterface.checkout("Bearer "+token,editPenerima.getText().toString(),editTelepon.getText().toString(),editKeterangan.getText().toString(),spinnerProvinsi.getSelectedItem().toString(),spinnerKota.getSelectedItem().toString(),editAlamat.getText().toString(),spinnerKurir.getSelectedItem().toString(),ongkir,partImage,id,jasa);
+        }else{
+            checkoutCall= mApiInterface.checkout("Bearer "+token,editPenerima.getText().toString(),editTelepon.getText().toString(),editKeterangan.getText().toString(),"","","","","",partImage,id,jasa);
+        }
+        checkoutCall.enqueue(new Callback<AddCheckout>() {
+            @Override
+            public void onResponse(Call<AddCheckout> call, Response<AddCheckout> response) {
+                Toast.makeText(getApplicationContext(),"Checkout berhasil, lakukan pembayaran",Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(CheckoutActivity.this, OrderActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onFailure(Call<AddCheckout> call, Throwable t) {
+                Log.d("ERR",""+t);
             }
         });
     }
