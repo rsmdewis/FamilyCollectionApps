@@ -95,7 +95,6 @@ public class CartActivity extends AppCompatActivity implements AdapterCart.IMeth
                 adapter= new AdapterCart(cartList,getApplicationContext(),CartActivity.this);
                 recyclerViewCart.setLayoutManager(layoutManager);
                 recyclerViewCart.setAdapter(adapter);
-
                 textViewTotal.setText(response.body().getTotal());
             }
 
