@@ -3,6 +3,7 @@ package com.example.familycollection.RestApi;
 
 import com.example.familycollection.Model.GetAkun;
 import com.example.familycollection.models.AddCart;
+import com.example.familycollection.models.AddCheckout;
 import com.example.familycollection.models.DeleteCart;
 import com.example.familycollection.models.GetCart;
 import com.example.familycollection.models.GetCity;
@@ -10,16 +11,20 @@ import com.example.familycollection.models.GetProduct;
 import com.example.familycollection.models.GetProductCategory;
 import com.example.familycollection.models.GetProvince;
 import com.example.familycollection.models.GetTransaction;
+import com.example.familycollection.models.OngkirCost;
 import com.example.familycollection.models.Register;
 import com.example.familycollection.models.ShowOrder;
 import com.example.familycollection.models.UpdateUser;
 
+import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 public interface ApiInterface {
@@ -75,5 +80,25 @@ public interface ApiInterface {
     @GET("ongkir/city")
     Call<GetCity> getCity(@Query("province_id") String province_id);
 
-
-}
+    @FormUrlEncoded
+    @POST("ongkir/cost")
+    Call<OngkirCost> cekOngkir(@Header("Authorization") String auth,
+                               @Field("origin") String origin,
+                               @Field("destination") String destination,
+                               @Field("weight") String weight,
+                               @Field("courier") String courier);
+    @Multipart
+    @POST("transaction/add")
+    Call<AddCheckout> checkout(@Header("Authorization") String auth,
+                               @Query("name") String name,
+                               @Query("phone") String phone,
+                               @Query("description") String description,
+                               @Query("province") String province,
+                               @Query("city") String city,
+                               @Query("address") String address,
+                               @Query("courier") String courier,
+                               @Query("cost") String cost,
+                               @Part MultipartBody.Part image,
+                               @Query("user_id") String user_id,
+                               @Query("pengiriman") String pengiriman)
+    ;}

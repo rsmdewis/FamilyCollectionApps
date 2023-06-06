@@ -86,7 +86,7 @@ public class CartActivity extends AppCompatActivity implements AdapterCart.IMeth
     }
 
     public void loadData(){
-        Log.d("HERE","DISINI");
+
         Call<GetCart> getCartCall=mApiInterface.getCart(id,"Bearer "+token);
         getCartCall.enqueue(new Callback<GetCart>() {
             @Override
