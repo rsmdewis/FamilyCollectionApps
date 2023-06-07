@@ -2,6 +2,7 @@ package com.example.familycollection.activity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
@@ -107,6 +108,11 @@ public class CheckoutActivity extends AppCompatActivity implements AdapterCart.I
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
         requestStoragePermission();
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar!=null){
+            actionBar.setDisplayShowHomeEnabled(true);
+            actionBar.setTitle("Check Out");
+        }
 
         textTotalBelanja = (TextView) findViewById(R.id.tv_totalBelanja);
         textOngkir = (TextView) findViewById(R.id.tv_ongkir);

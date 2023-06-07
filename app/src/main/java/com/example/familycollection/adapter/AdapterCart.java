@@ -69,7 +69,7 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.MyViewHolder> 
         holder.tv_berat.setText(cart.getListProduct().getWeight() + " Gram");
         holder.tv_harga.setText("Rp. "+cart.getListProduct().getPrice());
         holder.tv_totalHarga.setText("Rp. "+cart.getListProduct().getPrice());
-        final String urlGambarBerita = "http://192.168.1.32:8000/storage/" + cart.getListProduct().getGambar();
+        final String urlGambarBerita = "http://10.10.175.115:8000/storage/" + cart.getListProduct().getGambar();
         Picasso.get().load(urlGambarBerita).into(holder.img_produk);
         holder.btn_delete.setOnClickListener(new View.OnClickListener() {
             @Override

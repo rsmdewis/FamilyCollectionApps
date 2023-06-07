@@ -5,13 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.AboutActivity">
-
-    <ImageView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/logo_fc"
+        android:layout_height="250dp"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="24dp"
+        android:elevation="5dp"
+        android:background="@drawable/bg_profile2">
+        <ImageView
+            android:id="@+id/konveksi"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:src="@drawable/logo_fc"/>
+
+    </LinearLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,6 +20,16 @@
     <string name="order">Order</string>
     <string name="profil">Profile</string>
     <string name="kategori">Kategori</string>
+    <string name="edit">Edit Profile</string>
+    <string name="riwayat">Riwayat Pesanan</string>
+    <string name="tentang">Tentang Kami</string>
+    <string name="bantuan">Bantuan</string>
+    <string name="produk">Produk</string>
+    <string name="detail">Detail Produk</string>
+    <string name="cart">Keranjang</string>
+    <string name="checkout">Check Out</string>
+    <string name="pesanan">Detail Pesanan</string>
+    <string name="bayar">Bukti Transfer</string>
 
     <string-array name="daftar_ukuran">
         <item>S</item>
