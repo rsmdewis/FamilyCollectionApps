@@ -102,7 +102,7 @@ public class OrderActivity extends AppCompatActivity {
         });
     }
     private void initPesan() {
-        Call<GetTransaction> transactionCall= mApiInterface.getTransaction(id,"Bearer "+token);
+        Call<GetTransaction> transactionCall= mApiInterface.getTransaction(id,"Bearer "+token,"0");
         transactionCall.enqueue(new Callback<GetTransaction>() {
             @Override
             public void onResponse(Call<GetTransaction> call, Response<GetTransaction> response) {

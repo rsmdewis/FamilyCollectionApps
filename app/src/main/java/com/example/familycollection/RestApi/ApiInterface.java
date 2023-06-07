@@ -16,6 +16,7 @@ import com.example.familycollection.models.GetTransaction;
 import com.example.familycollection.models.OngkirCost;
 import com.example.familycollection.models.Register;
 import com.example.familycollection.models.ShowOrder;
+import com.example.familycollection.models.UpdateStatus;
 import com.example.familycollection.models.UpdateUser;
 
 import okhttp3.MultipartBody;
@@ -72,7 +73,7 @@ public interface ApiInterface {
                             @Field("password") String password,
                             @Field("name") String name);
     @GET("transaction/history")
-    Call<GetTransaction> getTransaction(@Query("user_id") String user_id, @Header("Authorization") String auth);
+    Call<GetTransaction> getTransaction(@Query("user_id") String user_id, @Header("Authorization") String auth,@Query("type") String type);
 
     @GET("transaction/show")
     Call<ShowOrder> showOrder(@Query("code") String code, @Header("Authorization") String auth);
@@ -112,4 +113,10 @@ public interface ApiInterface {
                                 @Query("code_transaction") String code_transaction,
                                 @Part MultipartBody.Part image,
                                 @Query("user_id") String user_id);
+    @FormUrlEncoded
+    @POST("transaction/update-status")
+    Call<UpdateStatus> updateStatus(@Header("Authorization") String auth,
+                                  @Field("code") String code,
+                                    @Field("status") String status,
+                                  @Field("user_id") String user_id);
 }

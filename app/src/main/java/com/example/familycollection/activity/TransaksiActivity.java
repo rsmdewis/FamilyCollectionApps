@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.familycollection.LoginActivity;
 import com.example.familycollection.R;
@@ -27,6 +28,7 @@ import com.example.familycollection.adapter.AdapterProdukTransaksi;
 import com.example.familycollection.models.Order;
 import com.example.familycollection.models.ProdukTransaksi;
 import com.example.familycollection.models.ShowOrder;
+import com.example.familycollection.models.UpdateStatus;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -49,7 +51,7 @@ public class TransaksiActivity extends AppCompatActivity {
     AdapterProdukTransaksi adapter;
     ApiInterface mApiInterface;
     SharedPreferences sharedPreferences;
-    String token,code;
+    String token,code,user_id;
 
     Intent mIntent;
 
@@ -87,14 +89,14 @@ public class TransaksiActivity extends AppCompatActivity {
         mApiInterface = ApiClient.getClient().create(ApiInterface.class);
         sharedPreferences = getApplicationContext().getSharedPreferences("remember", Context.MODE_PRIVATE);
         token = sharedPreferences.getString("TOKEN", "fail");
+        user_id = sharedPreferences.getString("USER_ID", "fail");
         mIntent=getIntent();
         code=mIntent.getStringExtra("code");
 
         btnPesanan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent Test1 = new Intent(getApplicationContext(), OrderActivity.class);
-                startActivity(Test1);
+               confirm();
             }
         });
         btnKonfirmasi.setOnClickListener(new View.OnClickListener() {
@@ -157,11 +159,22 @@ public class TransaksiActivity extends AppCompatActivity {
 
             }
         });
+    }
 
+    public void confirm(){
+        Call<UpdateStatus> updateStatusCall= mApiInterface.updateStatus("Bearer "+token,code,"3",user_id);
+        updateStatusCall.enqueue(new Callback<UpdateStatus>() {
+            @Override
+            public void onResponse(Call<UpdateStatus> call, Response<UpdateStatus> response) {
+                Toast.makeText(getApplicationContext(),"Pesanan telah diterima",Toast.LENGTH_LONG).show();
+                Intent Test1 = new Intent(getApplicationContext(), RiwayatActivity.class);
+                startActivity(Test1);
+            }
 
+            @Override
+            public void onFailure(Call<UpdateStatus> call, Throwable t) {
 
-//        userList = new ArrayList<>();
-//        userList.add(new ProdukTransaksi(R.drawable.top_background1, "Seragam Olahraga", "0,25kg", "65.000", "2", "130000"));
-//        userList.add(new ProdukTransaksi(R.drawable.top_background1, "Seragam Olahraga", "0,25kg", "65.000", "1", "65000"));
+            }
+        });
     }
 }
