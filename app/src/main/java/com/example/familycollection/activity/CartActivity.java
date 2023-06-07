@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -59,6 +60,11 @@ public class CartActivity extends AppCompatActivity implements AdapterCart.IMeth
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar!=null){
+            actionBar.setDisplayShowHomeEnabled(true);
+            actionBar.setTitle("Keranjang");
+        }
 
 //        checkBoxAll = (CheckBox) findViewById(R.id.cb_all);
 //        imageDelete = (ImageView) findViewById(R.id.btn_delete);
@@ -95,7 +101,6 @@ public class CartActivity extends AppCompatActivity implements AdapterCart.IMeth
                 adapter= new AdapterCart(cartList,getApplicationContext(),CartActivity.this);
                 recyclerViewCart.setLayoutManager(layoutManager);
                 recyclerViewCart.setAdapter(adapter);
-
                 textViewTotal.setText(response.body().getTotal());
             }
 

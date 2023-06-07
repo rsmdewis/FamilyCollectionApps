@@ -1,5 +1,6 @@
 package com.example.familycollection.activity;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -50,6 +51,11 @@ public class ProdukActivity extends AppCompatActivity {
         token = sharedPreferences.getString("TOKEN", "fail");
         mIntent=getIntent();
         id=mIntent.getStringExtra("id");
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar!=null){
+            actionBar.setDisplayShowHomeEnabled(true);
+            actionBar.setTitle("Produk");
+        }
 
         initData();
     }

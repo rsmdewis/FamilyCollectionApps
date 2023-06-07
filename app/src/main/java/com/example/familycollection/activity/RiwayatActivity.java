@@ -1,5 +1,6 @@
 package com.example.familycollection.activity;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,6 +28,11 @@ public class RiwayatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_riwayat);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar!=null){
+            actionBar.setDisplayShowHomeEnabled(true);
+            actionBar.setTitle("Riwayat Pesanan");
+        }
         recyclerViewRiwayat = (RecyclerView) findViewById(R.id.rv_riwayat);
         initRiwayat();
 

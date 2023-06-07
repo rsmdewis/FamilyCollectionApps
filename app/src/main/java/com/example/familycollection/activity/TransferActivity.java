@@ -1,5 +1,6 @@
 package com.example.familycollection.activity;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,6 +27,11 @@ public class TransferActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transfer);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar!=null){
+            actionBar.setDisplayShowHomeEnabled(true);
+            actionBar.setTitle("Konfirmasi Pembayaran");
+        }
 
         btnBukti = (Button) findViewById(R.id.btn_bukti);
         btnKonfirmasi = (Button) findViewById(R.id.btn_konfirmasi);

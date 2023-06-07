@@ -13,6 +13,7 @@
       android:orientation="vertical"
       android:layout_marginStart="32dp"
       android:layout_marginEnd="32dp"
+      android:layout_marginTop="100dp"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent">
@@ -26,6 +27,8 @@
         android:background="@drawable/edit_bg"
         android:ems="10"
         android:hint="Nama Lengkap"
+        android:text="Risma Dewi Septiani"
+        android:textColor="@color/black"
         android:inputType="textPersonName"
         android:padding="16dp" />
     <EditText
@@ -37,6 +40,8 @@
         android:background="@drawable/edit_bg"
         android:ems="10"
         android:hint="Email"
+        android:text="rsmdewis2409@gmail.com"
+        android:textColor="@color/black"
         android:inputType="textPersonName"
         android:padding="16dp" />
     <EditText
@@ -47,7 +52,9 @@
         android:layout_weight="1"
         android:background="@drawable/edit_bg"
         android:ems="10"
-        android:hint="Nomor HandPhone"
+        android:hint="Nomor Telepon"
+        android:text="081553021636"
+        android:textColor="@color/black"
         android:inputType="textPersonName"
         android:padding="16dp" />
     <EditText
@@ -66,7 +73,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="@dimen/loginViewsMargin"
-        style="@style/loginButton"
+        android:background="@drawable/login_button_bk"
         android:text="Simpan"/>
 
   </LinearLayout>

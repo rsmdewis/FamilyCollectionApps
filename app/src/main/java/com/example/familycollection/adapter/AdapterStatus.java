@@ -58,17 +58,17 @@ public class AdapterStatus extends RecyclerView.Adapter<AdapterStatus.MyViewHold
                 break;
         }
 
-        switch(transaction.getPengiriman()) {
-            case "1":
-                pengiriman="Kirim Pesanan";
-                break;
-            case "2":
-                pengiriman="Ambil Sendiri";
-                break;
-            default:
-                pengiriman="Ambil Sendiri";
-                break;
-        }
+//        switch(transaction.getPengiriman()) {
+//            case "1":
+//                pengiriman="Kirim Pesanan";
+//                break;
+//            case "2":
+//                pengiriman="Ambil Sendiri";
+//                break;
+//            default:
+//                pengiriman="Ambil Sendiri";
+//                break;
+//        }
         holder.status.setText(status);
         holder.tv_pengiriman.setText(pengiriman);
         holder.jumlah.setText(transaction.getTotal_product()+ " Item");

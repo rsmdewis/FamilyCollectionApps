@@ -47,7 +47,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="240dp"
                             android:background="@color/white"
-                            android:src="@drawable/top_background1" />
+                            android:src="@drawable/upload_image" />
                         <Button
                             android:id="@+id/foto_tambahan"
                             android:layout_width="match_parent"
