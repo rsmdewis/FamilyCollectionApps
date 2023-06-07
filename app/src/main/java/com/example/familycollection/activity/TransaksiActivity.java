@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -81,7 +82,6 @@ public class TransaksiActivity extends AppCompatActivity {
         tvNobank = (TextView) findViewById(R.id.tv_nobank);
         fotoTambahan = (ImageView) findViewById(R.id.foto_tambahan);
         layoutFooter = (LinearLayout) findViewById(R.id.div_footer);
-        btnBukti = (Button) findViewById(R.id.btn_bukti);
         btnKonfirmasi = (Button) findViewById(R.id.btn_konfirmasi);
         btnPesanan = (Button) findViewById(R.id.btn_pesanan_diterima);
         mApiInterface = ApiClient.getClient().create(ApiInterface.class);
@@ -89,6 +89,7 @@ public class TransaksiActivity extends AppCompatActivity {
         token = sharedPreferences.getString("TOKEN", "fail");
         mIntent=getIntent();
         code=mIntent.getStringExtra("code");
+
         btnPesanan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -100,6 +101,7 @@ public class TransaksiActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent Test1 = new Intent(getApplicationContext(), TransferActivity.class);
+                Test1.putExtra("code",code);
                 startActivity(Test1);
             }
         });
@@ -138,7 +140,14 @@ public class TransaksiActivity extends AppCompatActivity {
                 textTotalBelanja.setText("Rp. "+response.body().getOrderDetail().getTotal());
                 textOngkir.setText("Rp."+response.body().getOrderDetail().getCost());
                 textTotal.setText("Rp." +response.body().getOrderDetail().getTotal_bayar());
+                if(response.body().getOrderDetail().getPengiriman().equals("1")){
+                    textPegiriman.setText("Kirim Pesnanan");
+                }else{
+                    textPegiriman.setText("Ambil Sendiri");
+                    textOngkir.setText("Rp. 0");
+                }
 
+                textLunas.setText("Rp. "+response.body().getOrderDetail().getTotal_pelunasan());
 
             }
 
@@ -148,6 +157,8 @@ public class TransaksiActivity extends AppCompatActivity {
 
             }
         });
+
+
 
 //        userList = new ArrayList<>();
 //        userList.add(new ProdukTransaksi(R.drawable.top_background1, "Seragam Olahraga", "0,25kg", "65.000", "2", "130000"));

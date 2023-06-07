@@ -23,6 +23,12 @@
                     android:layout_marginTop="5dp"
                     tools:itemCount="1"
                     tools:listitem="@layout/item_transfer" />
+                <ImageView
+                    android:id="@+id/img_bukti"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:src="@drawable/upload_image"
+                    />
                 <Button
                     android:id="@+id/btn_bukti"
                     android:layout_marginTop="16dp"

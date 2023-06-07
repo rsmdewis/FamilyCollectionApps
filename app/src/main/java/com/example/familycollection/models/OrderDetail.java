@@ -38,6 +38,9 @@ public class OrderDetail {
     @SerializedName("total_bayar")
     private String total_bayar;
 
+    @SerializedName("total_pelunasan")
+    private String total_pelunasan;
+
     public String getId() {
         return id;
     }
@@ -148,6 +151,14 @@ public class OrderDetail {
 
     public void setTotal_bayar(String total_bayar) {
         this.total_bayar = total_bayar;
+    }
+
+    public String getTotal_pelunasan() {
+        return total_pelunasan;
+    }
+
+    public void setTotal_pelunasan(String total_pelunasan) {
+        this.total_pelunasan = total_pelunasan;
     }
 }
 

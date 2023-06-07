@@ -11,13 +11,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.familycollection.R;
+import com.example.familycollection.models.Payment;
 import com.example.familycollection.models.Transfer;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class AdapterTransfer extends RecyclerView.Adapter<AdapterTransfer.MyViewHolder> {
-    private List<Transfer> productList;
-    public AdapterTransfer (List<Transfer>productList){this.productList=productList;}
+    private List<Payment> paymentList;
+    public AdapterTransfer (List<Payment>paymentList){this.paymentList=paymentList;}
 
     @NonNull
     @Override
@@ -29,29 +31,42 @@ public class AdapterTransfer extends RecyclerView.Adapter<AdapterTransfer.MyView
 
     @Override
     public void onBindViewHolder(@NonNull AdapterTransfer.MyViewHolder holder, int position) {
-        Transfer transfer =productList.get(position);
-        holder.buktiTransfer.setImageResource(transfer.getBuktiTransfer());
-        holder.tanggal.setText(transfer.getTanggal());
-        holder.nominal.setText(transfer.getNominal());
+        Payment payment =paymentList.get(position);
+        String status;
+        final String urlGambarBerita = "http://192.168.0.6:8000/storage/" + payment.getImage();
+        Picasso.get().load(urlGambarBerita).into(holder.buktiTransfer);
+        holder.tanggal.setText(payment.getCreated_at());
+        holder.nominal.setText(payment.getPrice());
 
-
+        switch(payment.getStatus()) {
+            case "0":
+                status="Pending";
+                break;
+            case "1":
+                status="Selesai";
+                break;
+            default:
+                status="Pending";
+        }
+        holder.status.setText(status);
     }
 
     @Override
     public int getItemCount() {
 
-        return (productList == null) ? 0 : productList.size();
+        return (paymentList == null) ? 0 : paymentList.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         private ImageView buktiTransfer;
-        private TextView tanggal;
+        private TextView tanggal,status;
         private TextView nominal;
         public MyViewHolder(@NonNull View itemView){
             super(itemView);
             buktiTransfer=itemView.findViewById(R.id.img_transfer);
             tanggal=itemView.findViewById(R.id.tv_tgl);
             nominal=itemView.findViewById(R.id.tv_nominal);
+            status=itemView.findViewById(R.id.tv_status);
         }
 
     }

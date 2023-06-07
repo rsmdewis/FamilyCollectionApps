@@ -4,9 +4,11 @@ package com.example.familycollection.RestApi;
 import com.example.familycollection.Model.GetAkun;
 import com.example.familycollection.models.AddCart;
 import com.example.familycollection.models.AddCheckout;
+import com.example.familycollection.models.AddPayment;
 import com.example.familycollection.models.DeleteCart;
 import com.example.familycollection.models.GetCart;
 import com.example.familycollection.models.GetCity;
+import com.example.familycollection.models.GetPayment;
 import com.example.familycollection.models.GetProduct;
 import com.example.familycollection.models.GetProductCategory;
 import com.example.familycollection.models.GetProvince;
@@ -100,5 +102,14 @@ public interface ApiInterface {
                                @Query("cost") String cost,
                                @Part MultipartBody.Part image,
                                @Query("user_id") String user_id,
-                               @Query("pengiriman") String pengiriman)
-    ;}
+                               @Query("pengiriman") String pengiriman);
+    @GET("payment")
+    Call<GetPayment> getPayment(@Header("Authorization") String auth,
+                                @Query("code") String code);
+    @Multipart
+    @POST("transaction/payment")
+    Call<AddPayment> addPayment(@Header("Authorization") String auth,
+                                @Query("code_transaction") String code_transaction,
+                                @Part MultipartBody.Part image,
+                                @Query("user_id") String user_id);
+}
