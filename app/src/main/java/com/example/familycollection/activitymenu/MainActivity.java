@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -21,6 +22,7 @@ import com.example.familycollection.activity.DetailProdukActivity;
 import com.example.familycollection.R;
 import com.example.familycollection.activity.ProdukActivity;
 import com.example.familycollection.activity.ResetActivity;
+import com.example.familycollection.activity.RiwayatActivity;
 import com.example.familycollection.adapter.AdapterProduk;
 import com.example.familycollection.models.GetProduct;
 import com.example.familycollection.models.GetProductCategory;
@@ -93,6 +95,16 @@ public class MainActivity extends AppCompatActivity {
         });
 
         initData();
+
+        edtCari.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                Intent Test1 = new Intent(getApplicationContext(), ProdukActivity.class);
+                Test1.putExtra("nama",edtCari.getText().toString());
+                startActivity(Test1);
+                return false;
+            }
+        });
         layoutManager=new LinearLayoutManager(MainActivity.this);
         layoutManager.setOrientation(RecyclerView.HORIZONTAL);
 
@@ -127,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void initData() {
-        Call<GetProduct> getProductCall = mApiInterface.getProduct("","Bearer "+token);
+        Call<GetProduct> getProductCall = mApiInterface.getProduct("","Bearer "+token,"");
         getProductCall.enqueue(new Callback<GetProduct>() {
             @Override
             public void onResponse(Call<GetProduct> call, Response<GetProduct> response) {

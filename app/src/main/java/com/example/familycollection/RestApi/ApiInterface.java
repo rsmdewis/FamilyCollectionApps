@@ -38,7 +38,7 @@ public interface ApiInterface {
                             @Field("password") String password);
 
     @GET("product")
-    Call<GetProduct> getProduct(@Query("product_category_id") String product_category_id, @Header("Authorization") String auth);
+    Call<GetProduct> getProduct(@Query("product_category_id") String product_category_id, @Header("Authorization") String auth,@Query("search") String search);
 
     @GET("product/category")
     Call<GetProductCategory> getCategory(@Header("Authorization") String auth);
