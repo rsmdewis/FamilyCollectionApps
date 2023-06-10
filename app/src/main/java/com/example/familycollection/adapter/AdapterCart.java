@@ -3,6 +3,8 @@ package com.example.familycollection.adapter;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,7 @@ import com.example.familycollection.R;
 import com.example.familycollection.RestApi.ApiClient;
 import com.example.familycollection.RestApi.ApiInterface;
 import com.example.familycollection.activity.CartActivity;
+import com.example.familycollection.models.AddCart;
 import com.example.familycollection.models.Cart;
 import com.example.familycollection.models.DeleteCart;
 import com.example.familycollection.models.Pesan;
@@ -34,16 +37,21 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.MyViewHolder> 
     private List<Cart> cartList;
     Context context;
     private IMethodCaller iMethodCaller;
-    public AdapterCart(List<Cart>cartList,Context context,IMethodCaller iMethodCaller){
+    Integer calQty=0;
+    private  TextView textViewTotal;
+    public AdapterCart(List<Cart>cartList,Context context,IMethodCaller iMethodCaller,TextView textViewTotal){
         this.cartList=cartList;
         this.context=context;
         this.iMethodCaller = iMethodCaller;
+        this.textViewTotal = textViewTotal;
     }
 
     ApiInterface mApiInterface;
     SharedPreferences sharedPreferences;
-    String token;
+    String token,qty_ori;
     ProgressDialog progressDialog;
+
+    Integer grandTotal=0;
 
     @NonNull
     @Override
@@ -63,14 +71,66 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull AdapterCart.MyViewHolder holder, int position) {
+
+
         Cart cart =cartList.get(position);
-        holder.namaproduk.setText(cart.getListProduct().getNama());
+        calQty=Integer.parseInt(cart.getTotal_qty());
+        holder.namaproduk.setText(cart.getNama());
         holder.tv_ukuran.setText(cart.getSize());
-        holder.tv_berat.setText(cart.getListProduct().getWeight() + " Gram");
-        holder.tv_harga.setText("Rp. "+cart.getListProduct().getPrice());
-        holder.tv_totalHarga.setText("Rp. "+cart.getListProduct().getPrice());
-        final String urlGambarBerita = "http://10.10.175.115:8000/storage/" + cart.getListProduct().getGambar();
+        holder.tv_berat.setText(cart.getTotal_weight() + " Gram");
+        holder.tv_jumlah.setText(cart.getQty());
+        holder.tv_harga.setText("Rp. "+cart.getPrice());
+        holder.tv_totalHarga.setText("Rp. "+cart.getTotal_qty());
+        final String urlGambarBerita = "http://10.10.175.115:8000/storage/" + cart.getGambar();
         Picasso.get().load(urlGambarBerita).into(holder.img_produk);
+        holder.tv_jumlah.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(!charSequence.toString().equals("")){
+                    progressDialog.show();
+                    Integer qty=Integer.parseInt(charSequence.toString())-Integer.parseInt(cart.getQty());
+                    Call<AddCart> addCartCall=mApiInterface.postCart("Bearer "+token, cart.getUser_id(), cart.getProduct_id(),cart.getSize(),qty.toString());
+                    addCartCall.enqueue(new Callback<AddCart>() {
+                        @Override
+                        public void onResponse(Call<AddCart> call, Response<AddCart> response) {
+                            progressDialog.dismiss();
+                            iMethodCaller.loadData();
+                            Toast.makeText(context, "Update Cart", Toast.LENGTH_LONG).show();
+                        }
+
+                        @Override
+                        public void onFailure(Call<AddCart> call, Throwable t) {
+                            Log.d("ERR",""+t);
+                            progressDialog.dismiss();
+                        }
+                    });
+                    Log.d("ID",""+cart.getSize());
+//                    Integer qty=Integer.parseInt(charSequence.toString());
+//                    calQty=qty*Integer.parseInt(cart.getPrice());
+//                    Integer calWeight=qty*Integer.parseInt(cart.getWeight());
+//                    holder.tv_totalHarga.setText("Rp. "+calQty.toString());
+//                    holder.tv_berat.setText(calWeight.toString()+ "Gram");
+//                    grandTotal=grandTotal+calQty;
+//                    Log.d("total pay : ", String.valueOf(grandTotal));
+                }else{
+                    holder.tv_jumlah.setText("1");
+                }
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        grandTotal=grandTotal+calQty;
+        textViewTotal.setText(String.valueOf(grandTotal));
         holder.btn_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,6 +157,7 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.MyViewHolder> 
 
     public interface IMethodCaller {
         void loadData();
+
     }
     @Override
     public int getItemCount() {
@@ -105,13 +166,14 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.MyViewHolder> 
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        private TextView namaproduk,tv_berat,tv_harga,tv_totalHarga,tv_ukuran;
+        private TextView namaproduk,tv_berat,tv_harga,tv_totalHarga,tv_ukuran,tv_jumlah;
         private ImageView btn_delete,img_produk;
 
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             namaproduk = itemView.findViewById(R.id.tv_nama);
+            tv_jumlah = itemView.findViewById(R.id.tv_jumlah);
             tv_ukuran = itemView.findViewById(R.id.tv_ukuran);
             tv_berat = itemView.findViewById(R.id.tv_berat);
             tv_harga = itemView.findViewById(R.id.tv_harga);

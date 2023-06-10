@@ -270,13 +270,13 @@ public class CheckoutActivity extends AppCompatActivity implements AdapterCart.I
             @Override
             public void onResponse(Call<GetCart> call, Response<GetCart> response) {
                 cartList=response.body().getCartList();
-                adapter= new AdapterCart(cartList,getApplicationContext(),CheckoutActivity.this);
+                adapter= new AdapterCart(cartList,getApplicationContext(),CheckoutActivity.this,textTotalBelanja);
                 recyclerViewProduk.setLayoutManager(layoutManager);
                 recyclerViewProduk.setAdapter(adapter);
-                weight=response.body().getWeight();
-                totalBelanja=response.body().getTotal();
-                textTotalBelanja.setText(response.body().getTotal());
-                textTotal.setText(response.body().getTotal());
+                weight=response.body().getGrand_total_weight();
+                totalBelanja=response.body().getGrand_total_total();
+                textTotalBelanja.setText(response.body().getGrand_total_total());
+                textTotal.setText(response.body().getGrand_total_total());
 
             }
 
@@ -341,6 +341,7 @@ public class CheckoutActivity extends AppCompatActivity implements AdapterCart.I
         ongkirCostCall.enqueue(new Callback<OngkirCost>() {
             @Override
             public void onResponse(Call<OngkirCost> call, Response<OngkirCost> response) {
+                Log.d("RES",response.body().getCost());
                 textOngkir.setText(response.body().getCost());
                 Integer total=Integer.parseInt(response.body().getCost())+Integer.parseInt(totalBelanja);
                 ongkir=response.body().getCost();
