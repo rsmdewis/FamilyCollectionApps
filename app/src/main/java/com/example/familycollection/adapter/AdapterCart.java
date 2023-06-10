@@ -77,11 +77,10 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.MyViewHolder> 
         calQty=Integer.parseInt(cart.getTotal_qty());
         holder.namaproduk.setText(cart.getNama());
         holder.tv_ukuran.setText(cart.getSize());
-        holder.tv_berat.setText(cart.getTotal_weight() + " Gram");
-        holder.tv_jumlah.setText(cart.getQty());
-        holder.tv_harga.setText("Rp. "+cart.getPrice());
-        holder.tv_totalHarga.setText("Rp. "+cart.getTotal_qty());
-        final String urlGambarBerita = "http://10.10.175.115:8000/storage/" + cart.getGambar();
+        holder.tv_berat.setText(cart.getListProduct().getWeight() + " Gram");
+        holder.tv_harga.setText("Rp. "+cart.getListProduct().getPrice());
+        holder.tv_totalHarga.setText("Rp. "+cart.getListProduct().getPrice());
+        final String urlGambarBerita = "http://192.168.0.101:8000/storage/" + cart.getListProduct().getGambar();
         Picasso.get().load(urlGambarBerita).into(holder.img_produk);
         holder.tv_jumlah.addTextChangedListener(new TextWatcher() {
             @Override

@@ -31,7 +31,7 @@ public class AdapterProdukTransaksi extends RecyclerView.Adapter<AdapterProdukTr
     @Override
     public void onBindViewHolder(@NonNull AdapterProdukTransaksi.MyViewHolder holder, int position) {
         Order order =orderList.get(position);
-        final String urlGambarBerita = "http://10.10.175.115:8000/storage/" + order.getListProduct().getGambar();
+        final String urlGambarBerita = "http://192.168.0.101:8000/storage/" + order.getListProduct().getGambar();
         Picasso.get().load(urlGambarBerita).into(holder.fotoproduk);
         holder.namaproduk.setText(order.getListProduct().getNama());
         holder.berat.setText(order.getListProduct().getWeight()+ " Gram");
