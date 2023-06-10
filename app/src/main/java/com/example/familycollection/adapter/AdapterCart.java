@@ -91,7 +91,7 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.MyViewHolder> 
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(!charSequence.toString().equals("")){
+                if(!charSequence.toString().equals("") || !charSequence.toString().equals("0")  ){
                     progressDialog.show();
                     Integer qty=Integer.parseInt(charSequence.toString())-Integer.parseInt(cart.getQty());
                     Call<AddCart> addCartCall=mApiInterface.postCart("Bearer "+token, cart.getUser_id(), cart.getProduct_id(),cart.getSize(),qty.toString());
@@ -109,16 +109,6 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.MyViewHolder> 
                             progressDialog.dismiss();
                         }
                     });
-                    Log.d("ID",""+cart.getSize());
-//                    Integer qty=Integer.parseInt(charSequence.toString());
-//                    calQty=qty*Integer.parseInt(cart.getPrice());
-//                    Integer calWeight=qty*Integer.parseInt(cart.getWeight());
-//                    holder.tv_totalHarga.setText("Rp. "+calQty.toString());
-//                    holder.tv_berat.setText(calWeight.toString()+ "Gram");
-//                    grandTotal=grandTotal+calQty;
-//                    Log.d("total pay : ", String.valueOf(grandTotal));
-                }else{
-                    holder.tv_jumlah.setText("1");
                 }
 
 
