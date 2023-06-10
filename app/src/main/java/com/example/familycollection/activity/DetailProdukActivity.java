@@ -93,7 +93,7 @@ public class DetailProdukActivity extends AppCompatActivity {
     }
     private void addCart() {
         progressDialog.show();
-        Call<AddCart> addCartCall=mApiInterface.postCart("Bearer "+token,user_id,mIntent.getStringExtra("id"),""+spinner_size.getSelectedItem(),"");
+        Call<AddCart> addCartCall=mApiInterface.postCart("Bearer "+token,user_id,mIntent.getStringExtra("id"),""+spinner_size.getSelectedItem(),"1");
         addCartCall.enqueue(new Callback<AddCart>() {
             @Override
             public void onResponse(Call<AddCart> call, Response<AddCart> response) {
