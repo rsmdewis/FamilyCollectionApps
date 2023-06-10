@@ -70,13 +70,20 @@
                         android:text="Rp.10.000"
                         android:textSize="12dp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/tv_jumlah"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:text="1 item"
-                        android:textSize="12dp" />
+                        android:text="1"
+                        android:textSize="12dp"/>
+<!--                    <TextView-->
+<!--                        android:id="@+id/tv_jumlah"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_alignParentRight="true"-->
+<!--                        android:text="1 item"-->
+<!--                        android:textSize="12dp" />-->
 
                 </RelativeLayout>
 

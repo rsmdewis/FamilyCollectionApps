@@ -98,10 +98,10 @@ public class CartActivity extends AppCompatActivity implements AdapterCart.IMeth
             @Override
             public void onResponse(Call<GetCart> call, Response<GetCart> response) {
                 cartList=response.body().getCartList();
-                adapter= new AdapterCart(cartList,getApplicationContext(),CartActivity.this);
+                adapter= new AdapterCart(cartList,getApplicationContext(),CartActivity.this,textViewTotal);
                 recyclerViewCart.setLayoutManager(layoutManager);
                 recyclerViewCart.setAdapter(adapter);
-                textViewTotal.setText(response.body().getTotal());
+//                textViewTotal.setText(response.body().getGrand_total_total());
             }
 
             @Override

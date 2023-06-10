@@ -54,8 +54,8 @@ public interface ApiInterface {
     Call<AddCart> postCart(@Header("Authorization") String auth,
                            @Field("user_id") String user_id,
                            @Field("product_id") String product_id,
-                           @Field("size") String size);
-
+                           @Field("size") String size,
+                           @Field("qty") String qty);
     @FormUrlEncoded
     @POST("auth/register")
     Call<Register> register(@Field("email") String email,

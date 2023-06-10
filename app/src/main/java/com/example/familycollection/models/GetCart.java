@@ -19,6 +19,11 @@ public class GetCart {
     @SerializedName("weight")
     String weight;
 
+    @SerializedName("grand_total_weight")
+    private String grand_total_weight;
+
+    @SerializedName("grand_total_total")
+    private String grand_total_total;
     public GetCart() {
     }
 
@@ -59,5 +64,21 @@ public class GetCart {
 
     public void setWeight(String weight) {
         this.weight = weight;
+    }
+
+    public String getGrand_total_weight() {
+        return grand_total_weight;
+    }
+
+    public void setGrand_total_weight(String grand_total_weight) {
+        this.grand_total_weight = grand_total_weight;
+    }
+
+    public String getGrand_total_total() {
+        return grand_total_total;
+    }
+
+    public void setGrand_total_total(String grand_total_total) {
+        this.grand_total_total = grand_total_total;
     }
 }
