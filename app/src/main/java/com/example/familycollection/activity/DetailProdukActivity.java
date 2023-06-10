@@ -73,7 +73,7 @@ public class DetailProdukActivity extends AppCompatActivity {
 
         mApiInterface = ApiClient.getClient().create(ApiInterface.class);
         mIntent=getIntent();
-        final String urlGambarBerita = "http://192.168.0.101:8000/storage/" + mIntent.getStringExtra("gambar");
+        final String urlGambarBerita = "http://192.168.1.5:8000/storage/" + mIntent.getStringExtra("gambar");
         Picasso.get().load(urlGambarBerita).into(imgProduk);
         textNama.setText(mIntent.getStringExtra("nama"));
         textHarga.setText("Rp. "+mIntent.getStringExtra("harga"));
