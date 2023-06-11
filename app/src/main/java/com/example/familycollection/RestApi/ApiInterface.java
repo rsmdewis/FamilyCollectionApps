@@ -103,7 +103,8 @@ public interface ApiInterface {
                                @Query("cost") String cost,
                                @Part MultipartBody.Part image,
                                @Query("user_id") String user_id,
-                               @Query("pengiriman") String pengiriman);
+                               @Query("pengiriman") String pengiriman,
+                               @Query("deadline") String deadline);
     @GET("payment")
     Call<GetPayment> getPayment(@Header("Authorization") String auth,
                                 @Query("code") String code);

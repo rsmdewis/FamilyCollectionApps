@@ -42,12 +42,14 @@
                             android:text="Tambah Keterangan Pesanan"
                             android:textStyle="bold"
                             android:textColor="@color/colorPrimary" />
+
                         <ImageView
                             android:id="@+id/image_keterangan"
                             android:layout_width="match_parent"
                             android:layout_height="240dp"
                             android:background="@color/white"
                             android:src="@drawable/upload_image" />
+
                         <Button
                             android:id="@+id/foto_tambahan"
                             android:layout_width="match_parent"
@@ -67,6 +69,18 @@
                             android:textSize="15dp"
                             android:inputType="textPersonName"
                             android:padding="8dp" />
+                        <TextView
+                            android:layout_marginTop="32px"
+                            android:layout_marginBottom="32px"
+                            android:text="Tanggal deadline : "
+                            android:id="@+id/tv_dateresult"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <Button
+                            android:id="@+id/bt_datepicker"
+                            android:text="Pilih Tanggal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
                 <androidx.cardview.widget.CardView

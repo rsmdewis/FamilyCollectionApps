@@ -82,6 +82,7 @@ public class TransaksiActivity extends AppCompatActivity {
         textLunas = (TextView) findViewById(R.id.tv_lunas);
         tvBank = (TextView) findViewById(R.id.tv_bank);
         tvNobank = (TextView) findViewById(R.id.tv_nobank);
+        textTanggal = (TextView) findViewById(R.id.tv_deadline);
         fotoTambahan = (ImageView) findViewById(R.id.foto_tambahan);
         layoutFooter = (LinearLayout) findViewById(R.id.div_footer);
         btnKonfirmasi = (Button) findViewById(R.id.btn_konfirmasi);
@@ -130,7 +131,7 @@ public class TransaksiActivity extends AppCompatActivity {
             public void onResponse(Call<ShowOrder> call, Response<ShowOrder> response) {
                 progressDialog.dismiss();
                 orderList=response.body().getOrderList();
-                adapter= new AdapterProdukTransaksi(orderList);
+                adapter= new AdapterProdukTransaksi(orderList,textTotalBelanja,response.body().getOrderDetail().getCost(),textTotal);
                 recyclerViewProduk.setAdapter(adapter);
                 final String urlGambarBerita = "http://192.168.18.206:8000/storage/" + response.body().getOrderDetail().getImage();
                 Picasso.get().load(urlGambarBerita).into(fotoTambahan);
@@ -139,10 +140,16 @@ public class TransaksiActivity extends AppCompatActivity {
                 textPenerima.setText(response.body().getOrderDetail().getName());
                 textTelepon.setText(response.body().getOrderDetail().getPhone());
                 textAlamat.setText(response.body().getOrderDetail().getAddress());
-                textTotalBelanja.setText("Rp. "+response.body().getOrderDetail().getTotal());
-                textOngkir.setText("Rp."+response.body().getOrderDetail().getCost());
-                textTotal.setText("Rp." +response.body().getOrderDetail().getTotal_bayar());
+                textTanggal.setText("Deadline: "+response.body().getOrderDetail().getDeadline());
+//                if(response.body().getOrderDetail().getCost() == null){
+//                    textTotal.setText(textTotalBelanja.getText().toString());
+//                }else{
+//                    Log.d("HALLO","HAI");
+//                    Integer ttl=Integer.parseInt(textTotalBelanja.getText().toString()) + Integer.parseInt(response.body().getOrderDetail().getCost());
+//                    textTotal.setText("Rp." +ttl.toString());
+//                }
                 if(response.body().getOrderDetail().getPengiriman().equals("1")){
+                    textOngkir.setText("Rp."+response.body().getOrderDetail().getCost());
                     textPegiriman.setText("Kirim Pesnanan");
                 }else{
                     textPegiriman.setText("Ambil Sendiri");

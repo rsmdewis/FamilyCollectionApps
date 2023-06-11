@@ -18,7 +18,16 @@ import java.util.List;
 
 public class AdapterProdukTransaksi extends RecyclerView.Adapter<AdapterProdukTransaksi.MyViewHolder> {
     private List<Order> orderList;
-    public AdapterProdukTransaksi (List<Order>orderList){this.orderList=orderList;}
+    private  TextView textViewTotal,textGrandTotal;
+    Integer grandTotal=0;
+
+    String cost;
+    public AdapterProdukTransaksi (List<Order>orderList,TextView textViewTotal,String cost, TextView textGrandTotal){
+        this.orderList=orderList;
+        this.textViewTotal=textViewTotal;
+        this.cost=cost;
+        this.textGrandTotal=textGrandTotal;
+    }
 
     @NonNull
     @Override
@@ -35,10 +44,21 @@ public class AdapterProdukTransaksi extends RecyclerView.Adapter<AdapterProdukTr
         Picasso.get().load(urlGambarBerita).into(holder.fotoproduk);
         holder.namaproduk.setText(order.getListProduct().getNama());
         holder.berat.setText(order.getListProduct().getWeight()+ " Gram");
-        holder.total.setText(order.getListProduct().getPrice());
-        holder.harga.setText(order.getListProduct().getPrice());
-        holder.harga.setText(order.getListProduct().getPrice());
 
+        Integer Total=Integer.parseInt(order.getListProduct().getPrice()) * Integer.parseInt(order.getQty());
+        holder.total.setText(Total.toString());
+        holder.harga.setText(order.getListProduct().getPrice());
+        holder.tv_ukuran.setText(order.getSize());
+        holder.tv_jumlah.setText(order.getQty()+ " item");
+
+        grandTotal=grandTotal+Total;
+        textViewTotal.setText("Rp. "+String.valueOf(grandTotal));
+
+        if(cost != null){
+            textGrandTotal.setText("Rp. "+String.valueOf(grandTotal+Integer.parseInt(cost)));
+        }else{
+            textGrandTotal.setText("Rp. "+String.valueOf(grandTotal));
+        }
 
     }
 
@@ -50,7 +70,7 @@ public class AdapterProdukTransaksi extends RecyclerView.Adapter<AdapterProdukTr
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         private ImageView fotoproduk;
-        private TextView namaproduk,tv_ukuran;
+        private TextView namaproduk,tv_ukuran,tv_jumlah;
         private TextView berat;
         private TextView harga;
         private TextView item;
@@ -64,6 +84,7 @@ public class AdapterProdukTransaksi extends RecyclerView.Adapter<AdapterProdukTr
             item=itemView.findViewById(R.id.tv_jumlah);
             total=itemView.findViewById(R.id.tv_totalHarga);
             tv_ukuran=itemView.findViewById(R.id.tv_ukuran);
+            tv_jumlah=itemView.findViewById(R.id.tv_jumlah);
         }
 
     }

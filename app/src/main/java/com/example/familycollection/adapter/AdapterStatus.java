@@ -56,6 +56,9 @@ public class AdapterStatus extends RecyclerView.Adapter<AdapterStatus.MyViewHold
             case "4":
                 status="Diterima";
                 break;
+            case "5":
+                status="Ditolak";
+                break;
             default:
                 status="Pending";
                 break;
