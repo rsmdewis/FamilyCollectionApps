@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -27,6 +28,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -56,8 +58,11 @@ import com.example.familycollection.models.Province;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -67,7 +72,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class CheckoutActivity extends AppCompatActivity implements AdapterCart.IMethodCaller {
-    TextView textTotalBelanja, textOngkir, textTotal;
+    TextView textTotalBelanja, textOngkir, textTotal,tvDateresult;
     RecyclerView recyclerViewProduk;
     LinearLayout layoutFooter;
     CardView cardPengiriman;
@@ -93,13 +98,17 @@ public class CheckoutActivity extends AppCompatActivity implements AdapterCart.I
     private Uri filePath;
     ApiInterface mApiInterface;
     SharedPreferences sharedPreferences;
-    String id,token;
+    String id,token,deadline;
     ImageView imageKeterangan;
     ProgressDialog progressDialog;
 
     String origin,destination,weight,totalBelanja,ongkir,part_image,jasa="2";
     MultipartBody.Part fileToUpload;
     File finalFile;
+    Button btDatepicker;
+
+    private DatePickerDialog datePickerDialog;
+    private SimpleDateFormat dateFormatter;
 
 
 
@@ -116,6 +125,7 @@ public class CheckoutActivity extends AppCompatActivity implements AdapterCart.I
 
         textTotalBelanja = (TextView) findViewById(R.id.tv_totalBelanja);
         textOngkir = (TextView) findViewById(R.id.tv_ongkir);
+        tvDateresult = (TextView) findViewById(R.id.tv_dateresult);
         textTotal = (TextView) findViewById(R.id.tv_total);
         layoutFooter = (LinearLayout) findViewById(R.id.div_footer);
         btnpesan = (Button) findViewById(R.id.btn_pesan);
@@ -133,6 +143,16 @@ public class CheckoutActivity extends AppCompatActivity implements AdapterCart.I
         spinnerKota = (Spinner) findViewById(R.id.spn_kota);
         imageKeterangan = (ImageView) findViewById(R.id.image_keterangan);
         cardPengiriman = (CardView) findViewById(R.id.card_pengiriman);
+        btDatepicker=(Button) findViewById(R.id.bt_datepicker);
+
+        dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+
+        btDatepicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDateDialog();
+            }
+        });
 
         progressDialog = new ProgressDialog(CheckoutActivity.this);
         progressDialog.setMessage("Tunggu sebentar... ");
@@ -214,6 +234,23 @@ public class CheckoutActivity extends AppCompatActivity implements AdapterCart.I
         });
 
 
+    }
+
+    private void showDateDialog(){
+        Calendar newCalendar = Calendar.getInstance();
+
+        datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                deadline=dateFormatter.format(newDate.getTime());
+                tvDateresult.setText("Tanggal deadline : "+dateFormatter.format(newDate.getTime()));
+            }
+
+        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+        datePickerDialog.show();
     }
     private void requestStoragePermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
@@ -361,9 +398,9 @@ public class CheckoutActivity extends AppCompatActivity implements AdapterCart.I
         MultipartBody.Part partImage = MultipartBody.Part.createFormData("image", finalFile.getName(), reqBody);
         Call<AddCheckout> checkoutCall;
         if(jasa.equals("1")){
-            checkoutCall=mApiInterface.checkout("Bearer "+token,editPenerima.getText().toString(),editTelepon.getText().toString(),editKeterangan.getText().toString(),spinnerProvinsi.getSelectedItem().toString(),spinnerKota.getSelectedItem().toString(),editAlamat.getText().toString(),spinnerKurir.getSelectedItem().toString(),ongkir,partImage,id,jasa);
+            checkoutCall=mApiInterface.checkout("Bearer "+token,editPenerima.getText().toString(),editTelepon.getText().toString(),editKeterangan.getText().toString(),spinnerProvinsi.getSelectedItem().toString(),spinnerKota.getSelectedItem().toString(),editAlamat.getText().toString(),spinnerKurir.getSelectedItem().toString(),ongkir,partImage,id,jasa,deadline);
         }else{
-            checkoutCall= mApiInterface.checkout("Bearer "+token,editPenerima.getText().toString(),editTelepon.getText().toString(),editKeterangan.getText().toString(),"","","","","",partImage,id,jasa);
+            checkoutCall= mApiInterface.checkout("Bearer "+token,editPenerima.getText().toString(),editTelepon.getText().toString(),editKeterangan.getText().toString(),"","","","","",partImage,id,jasa,deadline);
         }
         checkoutCall.enqueue(new Callback<AddCheckout>() {
             @Override

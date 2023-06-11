@@ -13,6 +13,9 @@ public class Order {
     @SerializedName("size")
     private String size;
 
+    @SerializedName("qty")
+    private String qty;
+
     @SerializedName("product")
     private Product listProduct=null;
 
@@ -47,5 +50,13 @@ public class Order {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getQty() {
+        return qty;
+    }
+
+    public void setQty(String qty) {
+        this.qty = qty;
     }
 }
