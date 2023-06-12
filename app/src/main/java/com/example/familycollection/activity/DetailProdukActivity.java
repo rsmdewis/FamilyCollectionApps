@@ -2,6 +2,7 @@ package com.example.familycollection.activity;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
@@ -50,11 +51,10 @@ public class DetailProdukActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_produk);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar!=null){
-            actionBar.setDisplayShowHomeEnabled(true);
-            actionBar.setTitle("Detail Produk");
-        }
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Detail Produk");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         imgProduk = (ImageView) findViewById(R.id.image_produk);
         textNama = (TextView) findViewById(R.id.tv_nama);
@@ -73,7 +73,7 @@ public class DetailProdukActivity extends AppCompatActivity {
 
         mApiInterface = ApiClient.getClient().create(ApiInterface.class);
         mIntent=getIntent();
-        final String urlGambarBerita = "http://192.168.18.206:8000/storage/" + mIntent.getStringExtra("gambar");
+        final String urlGambarBerita = "http://192.168.1.37:8000/storage/" + mIntent.getStringExtra("gambar");
         Picasso.get().load(urlGambarBerita).into(imgProduk);
         textNama.setText(mIntent.getStringExtra("nama"));
         textHarga.setText("Rp. "+mIntent.getStringExtra("harga"));

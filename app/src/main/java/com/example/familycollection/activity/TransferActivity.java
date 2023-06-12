@@ -3,6 +3,7 @@ package com.example.familycollection.activity;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -75,10 +76,10 @@ public class TransferActivity extends AppCompatActivity {
         requestStoragePermission();
         setContentView(R.layout.activity_transfer);
         ActionBar actionBar = getSupportActionBar();
-        if (actionBar!=null){
-            actionBar.setDisplayShowHomeEnabled(true);
-            actionBar.setTitle("Konfirmasi Pembayaran");
-        }
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Konfirmasi Pembayaran");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         btnBukti = (Button) findViewById(R.id.btn_bukti);
         btnKonfirmasi = (Button) findViewById(R.id.btn_konfirmasi);

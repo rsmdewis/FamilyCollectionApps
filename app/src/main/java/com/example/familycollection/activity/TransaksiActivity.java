@@ -2,6 +2,7 @@ package com.example.familycollection.activity;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -64,11 +65,10 @@ public class TransaksiActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaksi);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar!=null){
-            actionBar.setDisplayShowHomeEnabled(true);
-            actionBar.setTitle("Detail Pesanan");
-        }
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Detail Pesanan");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         textKeterangan = (TextView) findViewById(R.id.tv_keterangan);
         textPegiriman = (TextView) findViewById(R.id.tv_kirim);
@@ -133,7 +133,7 @@ public class TransaksiActivity extends AppCompatActivity {
                 orderList=response.body().getOrderList();
                 adapter= new AdapterProdukTransaksi(orderList,textTotalBelanja,response.body().getOrderDetail().getCost(),textTotal);
                 recyclerViewProduk.setAdapter(adapter);
-                final String urlGambarBerita = "http://192.168.18.206:8000/storage/" + response.body().getOrderDetail().getImage();
+                final String urlGambarBerita = "http://192.168.1.37:8000/storage/" + response.body().getOrderDetail().getImage();
                 Picasso.get().load(urlGambarBerita).into(fotoTambahan);
                 textKeterangan.setText(response.body().getOrderDetail().getDescription());
                 textKurir.setText(response.body().getOrderDetail().getCourier());

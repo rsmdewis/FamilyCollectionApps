@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -120,11 +121,10 @@ public class CheckoutActivity extends AppCompatActivity implements AdapterCart.I
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
         requestStoragePermission();
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar!=null){
-            actionBar.setDisplayShowHomeEnabled(true);
-            actionBar.setTitle("Check Out");
-        }
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Check Out");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         textTotalBelanja = (TextView) findViewById(R.id.tv_totalBelanja);
         textOngkir = (TextView) findViewById(R.id.tv_ongkir);
