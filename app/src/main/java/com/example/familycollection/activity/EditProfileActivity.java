@@ -39,8 +39,11 @@ public class EditProfileActivity extends AppCompatActivity {
     Button buttonSimpan;
     ApiInterface mApiInterface;
     SharedPreferences sharedPreferences;
-    String token,id;
+    String token,id,name,email,phone;
     ProgressDialog progressDialog;
+
+    SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +61,13 @@ public class EditProfileActivity extends AppCompatActivity {
         sharedPreferences = getApplicationContext().getSharedPreferences("remember", Context.MODE_PRIVATE);
         token = sharedPreferences.getString("TOKEN", "fail");
         id = sharedPreferences.getString("USER_ID", "fail");
+        name=sharedPreferences.getString("NAMA", "fail");
+        email=sharedPreferences.getString("EMAIL", "fail");
+        phone=sharedPreferences.getString("PHONE", "fail");
+
+        etNama.setText(name);
+        etEmail.setText(email);
+        etnohp.setText(phone);
         progressDialog = new ProgressDialog(EditProfileActivity.this);
         progressDialog.setMessage("Tunggu sebentar... ");
         progressDialog.setIndeterminate(false);
@@ -80,6 +90,11 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<UpdateUser> call, Response<UpdateUser> response) {
                 progressDialog.dismiss();
+
+                editor.putString("NAMA", etNama.getText().toString());
+                editor.putString("EMAIL", etEmail.getText().toString());
+                editor.putString("PHONE", etnohp.getText().toString());
+                editor.apply();
                 Toast.makeText(EditProfileActivity.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(EditProfileActivity.this, ProfileActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);

@@ -89,6 +89,7 @@ public class LoginActivity extends AppCompatActivity {
                             String id=akuns.get(0).getId();
                             String nama=akuns.get(0).getName();
                             String email=akuns.get(0).getEmail();
+                            String phone=akuns.get(0).getPhone();
 
 
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -96,6 +97,7 @@ public class LoginActivity extends AppCompatActivity {
                             editor.putString("USER_ID", id);
                             editor.putString("NAMA", nama);
                             editor.putString("EMAIL", email);
+                            editor.putString("PHONE", phone);
 
                             editor.apply();
                             startActivity(intent);
