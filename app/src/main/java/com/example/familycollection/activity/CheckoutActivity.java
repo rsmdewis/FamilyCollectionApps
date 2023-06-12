@@ -109,6 +109,9 @@ public class CheckoutActivity extends AppCompatActivity implements AdapterCart.I
 
     private DatePickerDialog datePickerDialog;
     private SimpleDateFormat dateFormatter;
+    RequestBody reqBody;
+    MultipartBody.Part partImage;
+    Call<AddCheckout> checkoutCall;
 
 
 
@@ -394,13 +397,23 @@ public class CheckoutActivity extends AppCompatActivity implements AdapterCart.I
     }
 
     private void _checkout(){
-        RequestBody reqBody = RequestBody.create(MediaType.parse("multipart/form-file"), finalFile);
-        MultipartBody.Part partImage = MultipartBody.Part.createFormData("image", finalFile.getName(), reqBody);
-        Call<AddCheckout> checkoutCall;
+        Log.d("ERR",""+finalFile);
+        if(finalFile != null){
+            reqBody = RequestBody.create(MediaType.parse("multipart/form-file"), finalFile);
+            partImage = MultipartBody.Part.createFormData("image", finalFile.getName(), reqBody);
+        }
         if(jasa.equals("1")){
-            checkoutCall=mApiInterface.checkout("Bearer "+token,editPenerima.getText().toString(),editTelepon.getText().toString(),editKeterangan.getText().toString(),spinnerProvinsi.getSelectedItem().toString(),spinnerKota.getSelectedItem().toString(),editAlamat.getText().toString(),spinnerKurir.getSelectedItem().toString(),ongkir,partImage,id,jasa,deadline);
+            if(finalFile != null){
+                checkoutCall=mApiInterface.checkout("Bearer "+token,editPenerima.getText().toString(),editTelepon.getText().toString(),editKeterangan.getText().toString(),spinnerProvinsi.getSelectedItem().toString(),spinnerKota.getSelectedItem().toString(),editAlamat.getText().toString(),spinnerKurir.getSelectedItem().toString(),ongkir,partImage,id,jasa,deadline);
+            }else{
+                checkoutCall=mApiInterface.checkoutNull("Bearer "+token,editPenerima.getText().toString(),editTelepon.getText().toString(),editKeterangan.getText().toString(),spinnerProvinsi.getSelectedItem().toString(),spinnerKota.getSelectedItem().toString(),editAlamat.getText().toString(),spinnerKurir.getSelectedItem().toString(),ongkir,id,jasa,deadline);
+            }
         }else{
-            checkoutCall= mApiInterface.checkout("Bearer "+token,editPenerima.getText().toString(),editTelepon.getText().toString(),editKeterangan.getText().toString(),"","","","","",partImage,id,jasa,deadline);
+            if(finalFile != null) {
+                checkoutCall = mApiInterface.checkout("Bearer " + token, editPenerima.getText().toString(), editTelepon.getText().toString(), editKeterangan.getText().toString(), "", "", "", "", "", partImage, id, jasa, deadline);
+            }else{
+                checkoutCall=mApiInterface.checkoutNull("Bearer "+token,editPenerima.getText().toString(),editTelepon.getText().toString(),editKeterangan.getText().toString(),"", "", "", "", "",id,jasa,deadline);
+            }
         }
         checkoutCall.enqueue(new Callback<AddCheckout>() {
             @Override

@@ -105,6 +105,20 @@ public interface ApiInterface {
                                @Query("user_id") String user_id,
                                @Query("pengiriman") String pengiriman,
                                @Query("deadline") String deadline);
+
+    @POST("transaction/add")
+    Call<AddCheckout> checkoutNull(@Header("Authorization") String auth,
+                               @Query("name") String name,
+                               @Query("phone") String phone,
+                               @Query("description") String description,
+                               @Query("province") String province,
+                               @Query("city") String city,
+                               @Query("address") String address,
+                               @Query("courier") String courier,
+                               @Query("cost") String cost,
+                               @Query("user_id") String user_id,
+                               @Query("pengiriman") String pengiriman,
+                               @Query("deadline") String deadline);
     @GET("payment")
     Call<GetPayment> getPayment(@Header("Authorization") String auth,
                                 @Query("code") String code);
