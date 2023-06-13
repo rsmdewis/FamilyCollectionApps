@@ -9,7 +9,8 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
+        android:background="@color/white"
+        android:elevation="5dp"
         app:popupTheme="@style/Widget.Material3.PopupMenu.Overflow"
         />
     <ScrollView

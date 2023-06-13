@@ -11,6 +11,7 @@ import com.example.familycollection.R;
 
 public class AboutActivity extends AppCompatActivity {
     ImageView imageViewkonveksi;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

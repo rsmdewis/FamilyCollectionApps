@@ -53,8 +53,8 @@ public class DetailProdukActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_produk);
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Detail Produk");
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        setSupportActionBar(toolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         imgProduk = (ImageView) findViewById(R.id.image_produk);
         textNama = (TextView) findViewById(R.id.tv_nama);

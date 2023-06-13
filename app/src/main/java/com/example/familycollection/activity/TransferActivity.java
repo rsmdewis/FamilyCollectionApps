@@ -75,11 +75,11 @@ public class TransferActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         requestStoragePermission();
         setContentView(R.layout.activity_transfer);
-        ActionBar actionBar = getSupportActionBar();
+//        ActionBar actionBar = getSupportActionBar();
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Konfirmasi Pembayaran");
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        setSupportActionBar(toolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         btnBukti = (Button) findViewById(R.id.btn_bukti);
         btnKonfirmasi = (Button) findViewById(R.id.btn_konfirmasi);
