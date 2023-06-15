@@ -31,7 +31,7 @@ import com.google.android.material.navigation.NavigationBarView;
 public class ProfileActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigation;
     LinearLayout layout1, layout3;
-    RelativeLayout rlEditProfile, rlRiwayat, rlTentang, rlHelp, btnCart;
+    RelativeLayout rlEditProfile, rlTentang, rlHelp, btnCart;
     Button btnLogout;
     TextView textNama, textEmail, textLogout;
     SharedPreferences sharedPreferences;
@@ -53,7 +53,7 @@ public class ProfileActivity extends AppCompatActivity {
         layout1 = (LinearLayout) findViewById(R.id.linearlayout);
         layout3 = (LinearLayout) findViewById(R.id.linearlayout3);
         rlEditProfile = (RelativeLayout) findViewById(R.id.btn_editProfile);
-        rlRiwayat = (RelativeLayout) findViewById(R.id.btn_riwayat);
+//        rlRiwayat = (RelativeLayout) findViewById(R.id.btn_riwayat);
         rlTentang = (RelativeLayout) findViewById(R.id.btn_tentang);
         rlHelp = (RelativeLayout) findViewById(R.id.btn_help);
         btnCart = (RelativeLayout) findViewById(R.id.btn_Keranjang);
@@ -75,13 +75,13 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity(Test1);
             }
         });
-        rlRiwayat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent Test1 = new Intent(getApplicationContext(), RiwayatActivity.class);
-                startActivity(Test1);
-            }
-        });
+//        rlRiwayat.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent Test1 = new Intent(getApplicationContext(), RiwayatActivity.class);
+//                startActivity(Test1);
+//            }
+//        });
         rlTentang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

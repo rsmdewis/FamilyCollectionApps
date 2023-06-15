@@ -25,18 +25,23 @@
             android:name=".activity.TransferActivity"
             android:exported="false" />
         <activity
+            android:parentActivityName=".activity.CartActivity"
             android:name=".activity.CheckoutActivity"
             android:exported="false" />
         <activity
+            android:parentActivityName=".activitymenu.ProfileActivity"
             android:name=".activity.HelpActivity"
             android:exported="false" />
         <activity
+            android:parentActivityName=".activitymenu.ProfileActivity"
             android:name=".activity.AboutActivity"
             android:exported="false" />
         <activity
+            android:parentActivityName=".activitymenu.ProfileActivity"
             android:name=".activity.RiwayatActivity"
             android:exported="false" />
         <activity
+            android:parentActivityName=".activitymenu.MainActivity"
             android:name=".activity.ProdukActivity"
             android:exported="false"
             />
@@ -45,6 +50,7 @@
             android:exported="false"
             android:theme="@style/AppTheme" />
         <activity
+            android:parentActivityName=".activitymenu.OrderActivity"
             android:name=".activity.TransaksiActivity"
             android:exported="false" />
         <activity
@@ -52,18 +58,14 @@
             android:exported="false" />
         <activity
             android:name=".MasukActivity"
-            android:exported="true"
+            android:exported="false"
             android:theme="@style/AppTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".activity.ListAlamatActivity"
             android:exported="false" />
         <activity
+            android:parentActivityName=".activitymenu.ProfileActivity"
             android:name=".activity.EditProfileActivity"
             android:exported="false" />
         <activity
@@ -90,8 +92,14 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".LoginActivity"
-            android:exported="false"
-            android:theme="@style/AppTheme" />
+            android:exported="true"
+            android:theme="@style/AppTheme" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".activitymenu.MainActivity"
             android:exported="false"

@@ -8,9 +8,20 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
+            android:elevation="5dp"
+            app:popupTheme="@style/Widget.Material3.PopupMenu.Overflow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="55dp"
             android:layout_above="@+id/div_footer">
             <LinearLayout
                 android:layout_width="match_parent"
@@ -44,18 +55,39 @@
                         <ImageView
                             android:id="@+id/foto_tambahan"
                             android:layout_width="match_parent"
-                            android:layout_height="200dp"
+                            android:layout_height="wrap_content"
                             android:src="@drawable/upload_image"
                             />
 
                         <TextView
                             android:id="@+id/tv_keterangan"
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:text="Keterangan"
                             android:textColor="@color/black"
                             android:textSize="12dp" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Tanggal Selesai"
+                                android:textSize="12dp" />
+
+                            <TextView
+                                android:id="@+id/tv_selesai"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.5"
+                                android:text="tanggal"
+                                android:textColor="@color/black"
+                                android:textSize="12dp" />
+                        </LinearLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
                 <androidx.cardview.widget.CardView
@@ -250,7 +282,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Informasi Pembayaran"
+                            android:text="Silahkan Transfer di Nomor Rekening di Bawah ini!"
                             android:textStyle="bold"
                             android:textColor="@color/colorPrimary" />
                         <TextView

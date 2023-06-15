@@ -81,7 +81,7 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.MyViewHolder> 
         holder.tv_jumlah.setText(cart.getQty());
         holder.tv_harga.setText("Rp. "+cart.getPrice());
         holder.tv_totalHarga.setText("Rp. "+cart.getTotal_qty());
-        final String urlGambarBerita = "http://192.168.18.206:8000/storage/" + cart.getGambar();
+        final String urlGambarBerita = "http://192.168.1.18:8000/storage/" + cart.getGambar();
         Picasso.get().load(urlGambarBerita).into(holder.img_produk);
         holder.tv_jumlah.addTextChangedListener(new TextWatcher() {
             @Override

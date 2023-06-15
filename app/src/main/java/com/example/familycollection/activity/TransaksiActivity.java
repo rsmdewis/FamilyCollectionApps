@@ -2,6 +2,7 @@ package com.example.familycollection.activity;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -41,7 +42,7 @@ import retrofit2.Response;
 public class TransaksiActivity extends AppCompatActivity {
 
     TextView textStatus, textTanggal, textKeterangan, textPegiriman, textKurir, textPenerima,
-            textTelepon, textAlamat, textTotalBelanja, textOngkir, textTotal, textLunas, tvBank, tvNobank;
+            textTelepon, textAlamat, textTotalBelanja, textOngkir, textTotal, textLunas, tvBank, tvNobank, textSelesai;
     RecyclerView recyclerViewProduk;
     ImageView fotoTambahan;
     LinearLayout layoutFooter;
@@ -64,13 +65,13 @@ public class TransaksiActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaksi);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar!=null){
-            actionBar.setDisplayShowHomeEnabled(true);
-            actionBar.setTitle("Detail Pesanan");
-        }
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Detail Pesanan");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         textKeterangan = (TextView) findViewById(R.id.tv_keterangan);
+        textSelesai = (TextView) findViewById(R.id.tv_selesai);
         textPegiriman = (TextView) findViewById(R.id.tv_kirim);
         textKurir = (TextView) findViewById(R.id.tv_kurir);
         textPenerima = (TextView) findViewById(R.id.tv_penerima);
@@ -149,9 +150,10 @@ public class TransaksiActivity extends AppCompatActivity {
                 orderList=response.body().getOrderList();
                 adapter= new AdapterProdukTransaksi(orderList,textTotalBelanja,response.body().getOrderDetail().getCost(),textTotal);
                 recyclerViewProduk.setAdapter(adapter);
-                final String urlGambarBerita = "http://192.168.18.206:8000/storage/" + response.body().getOrderDetail().getImage();
+                final String urlGambarBerita = "http://192.168.1.18:8000/storage/" + response.body().getOrderDetail().getImage();
                 Picasso.get().load(urlGambarBerita).into(fotoTambahan);
                 textKeterangan.setText(response.body().getOrderDetail().getDescription());
+                textSelesai.setText(response.body().getOrderDetail().getDeadline());
                 textKurir.setText(response.body().getOrderDetail().getCourier());
                 textPenerima.setText(response.body().getOrderDetail().getName());
                 textTelepon.setText(response.body().getOrderDetail().getPhone());

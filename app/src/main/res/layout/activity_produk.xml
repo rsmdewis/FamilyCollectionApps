@@ -5,10 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.ProdukActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        android:elevation="5dp"
+        app:popupTheme="@style/Widget.Material3.PopupMenu.Overflow"
+        />
+    <ScrollView
+        android:layout_marginTop="55dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <androidx.recyclerview.widget.RecyclerView
+
         android:id="@+id/recyclerview_produk"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/item_produk"/>
-
+    </ScrollView>
 </RelativeLayout>
