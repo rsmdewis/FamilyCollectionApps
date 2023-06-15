@@ -172,7 +172,7 @@ public class CheckoutActivity extends AppCompatActivity implements AdapterCart.I
                     editPenerima.setError("Tidak Boleh Kosong!");
                 else if (editTelepon.getText().toString().length() == 0) {
                     editTelepon.setError("Tidak Boleh Kosong!");
-                }else if (deadline.toString().length() == 0) {
+                }else if (deadline.length() == 0) {
                     Toast.makeText(getApplicationContext(),"Tanggal deadline tidak boleh kosong!",Toast.LENGTH_LONG).show();
                 }
                 else{
