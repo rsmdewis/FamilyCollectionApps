@@ -114,7 +114,7 @@
                     <LinearLayout
                         android:id="@+id/linearlayout"
                         android:layout_width="match_parent"
-                        android:layout_height="60dp"
+                        android:layout_height="100dp"
                         android:layout_marginStart="24dp"
                         android:layout_marginTop="60dp"
                         android:layout_marginEnd="24dp"
@@ -160,41 +160,41 @@
                                 app:srcCompat="@drawable/ic_cevron" />
 
                         </RelativeLayout>
-<!--                        <RelativeLayout-->
-<!--                            android:id="@+id/btn_riwayat"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginHorizontal="10dp"-->
-<!--                            android:layout_marginTop="20dp"-->
-<!--                            android:gravity="center_vertical">-->
+                        <RelativeLayout
+                            android:id="@+id/btn_riwayat"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_marginTop="20dp"
+                            android:gravity="center_vertical">
 
-<!--                            <LinearLayout-->
-<!--                                android:layout_width="match_parent"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:gravity="center_vertical"-->
-<!--                                android:orientation="horizontal">-->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
 
-<!--                                <ImageView-->
-<!--                                    android:layout_width="wrap_content"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    app:srcCompat="@drawable/ic_history" />-->
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    app:srcCompat="@drawable/ic_history" />
 
-<!--                                <TextView-->
-<!--                                    android:layout_width="wrap_content"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:layout_marginLeft="10dp"-->
-<!--                                    android:text="Riwayat Pesanan"-->
-<!--                                    android:textColor="@color/colorPrimaryDark" />-->
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="10dp"
+                                    android:text="Riwayat Pesanan"
+                                    android:textColor="@color/colorPrimaryDark" />
 
-<!--                            </LinearLayout>-->
+                            </LinearLayout>
 
-<!--                            <ImageView-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:layout_alignParentRight="true"-->
-<!--                                app:srcCompat="@drawable/ic_cevron" />-->
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                app:srcCompat="@drawable/ic_cevron" />
 
-<!--                        </RelativeLayout>-->
+                        </RelativeLayout>
 
 
 

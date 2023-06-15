@@ -74,7 +74,16 @@ public class EditProfileActivity extends AppCompatActivity {
         buttonSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                update();
+                if (etNama.getText().toString().length() == 0)
+                    etNama.setError("Tidak Boleh Kosong!");
+                else if (etEmail.getText().toString().length() == 0) {
+                    etEmail.setError("Tidak Boleh Kosong!");
+                } else if (etnohp.getText().toString().length() == 0) {
+                    etnohp.setError("Tidak Boleh Kosong!");
+                }else{
+                    update();
+                }
+
             }
         });
 

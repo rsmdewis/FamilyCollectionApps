@@ -168,7 +168,14 @@ public class CheckoutActivity extends AppCompatActivity implements AdapterCart.I
         btnpesan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                _checkout();
+                if (editPenerima.getText().toString().length() == 0)
+                    editPenerima.setError("Tidak Boleh Kosong!");
+                else if (editTelepon.getText().toString().length() == 0) {
+                    editTelepon.setError("Tidak Boleh Kosong!");
+                }else{
+                    _checkout();
+                }
+
             }
         });
 

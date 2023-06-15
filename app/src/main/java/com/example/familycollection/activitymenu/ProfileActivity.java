@@ -1,6 +1,7 @@
 package com.example.familycollection.activitymenu;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
@@ -31,7 +33,7 @@ import com.google.android.material.navigation.NavigationBarView;
 public class ProfileActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigation;
     LinearLayout layout1, layout3;
-    RelativeLayout rlEditProfile, rlTentang, rlHelp, btnCart;
+    RelativeLayout rlEditProfile, rlTentang, rlHelp, btnCart, rlRiwayat;
     Button btnLogout;
     TextView textNama, textEmail, textLogout;
     SharedPreferences sharedPreferences;
@@ -53,10 +55,12 @@ public class ProfileActivity extends AppCompatActivity {
         layout1 = (LinearLayout) findViewById(R.id.linearlayout);
         layout3 = (LinearLayout) findViewById(R.id.linearlayout3);
         rlEditProfile = (RelativeLayout) findViewById(R.id.btn_editProfile);
-//        rlRiwayat = (RelativeLayout) findViewById(R.id.btn_riwayat);
+        rlRiwayat = (RelativeLayout) findViewById(R.id.btn_riwayat);
         rlTentang = (RelativeLayout) findViewById(R.id.btn_tentang);
         rlHelp = (RelativeLayout) findViewById(R.id.btn_help);
         btnCart = (RelativeLayout) findViewById(R.id.btn_Keranjang);
+
+
 
         textNama.setText(nama);
         textEmail.setText(email);
@@ -75,13 +79,13 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity(Test1);
             }
         });
-//        rlRiwayat.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent Test1 = new Intent(getApplicationContext(), RiwayatActivity.class);
-//                startActivity(Test1);
-//            }
-//        });
+        rlRiwayat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent Test1 = new Intent(getApplicationContext(), RiwayatActivity.class);
+                startActivity(Test1);
+            }
+        });
         rlTentang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,8 +103,7 @@ public class ProfileActivity extends AppCompatActivity {
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent Test1 = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(Test1);
+                showDialog();
             }
         });
 
@@ -129,5 +132,33 @@ public class ProfileActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+    private void showDialog(){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                this);
+
+        // set title dialog
+        alertDialogBuilder.setTitle("Apakah Anda Ingin Logout?");
+
+        // set pesan dari dialog
+        alertDialogBuilder
+                .setCancelable(false)
+                .setPositiveButton("Ya",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        Intent Test1 = new Intent(getApplicationContext(), LoginActivity.class);
+                        startActivity(Test1);
+                    }
+                })
+                .setNegativeButton("Tidak",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        // membuat alert dialog dari builder
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // menampilkan alert dialog
+        alertDialog.show();
     }
 }
