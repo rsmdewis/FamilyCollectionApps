@@ -52,7 +52,19 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                register();
+                if (editNama.getText().toString().length() == 0)
+                    editNama.setError("Tidak Boleh Kosong!");
+                else if (editPass.getText().toString().length() == 0) {
+                    editPass.setError("Tidak Boleh Kosong!");
+                } else if (editPhone.getText().toString().length() == 0) {
+                    editPhone.setError("Tidak Boleh Kosong!");
+                } else if (editPass.getText().toString().length() == 0) {
+                    editPass.setError("Tidak Boleh Kosong!");
+                } else if (editEmail.getText().toString().length() == 0) {
+                    editEmail.setError("Tidak Boleh Kosong!");
+                }else{
+                    register();
+                }
             }
         });
         tvLogin.setOnClickListener(new View.OnClickListener() {

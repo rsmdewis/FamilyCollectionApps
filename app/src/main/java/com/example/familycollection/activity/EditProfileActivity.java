@@ -31,9 +31,7 @@ import retrofit2.Response;
 
 public class EditProfileActivity extends AppCompatActivity {
 
-    ConstraintLayout clRegister;
-    ImageView imgLogo;
-    TextView textEdit;
+
     EditText etUsername, etNama, etEmail, etnohp, etPassword;
     Button buttonSimpan;
     ApiInterface mApiInterface;

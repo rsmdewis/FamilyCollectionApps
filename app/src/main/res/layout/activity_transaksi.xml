@@ -290,7 +290,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#F3F3F3" />
-
+            <Button
+                android:visibility="gone"
+                android:id="@+id/btn_cancel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Batalkan Transaksi"/>
+            <Button
+                android:visibility="gone"
+                android:id="@+id/btn_next"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Lanjut Transaksi"/>
             <Button
                 android:id="@+id/btn_pesanan_diterima"
                 android:layout_width="match_parent"

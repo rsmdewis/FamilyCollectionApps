@@ -45,7 +45,7 @@ public class TransaksiActivity extends AppCompatActivity {
     RecyclerView recyclerViewProduk;
     ImageView fotoTambahan;
     LinearLayout layoutFooter;
-    Button btnPesanan, btnBukti, btnKonfirmasi;
+    Button btnPesanan, btnBukti, btnKonfirmasi,btn_cancel,btn_next;
     LinearLayoutManager layoutManager;
     List<Order> orderList;
     AdapterProdukTransaksi adapter;
@@ -87,6 +87,8 @@ public class TransaksiActivity extends AppCompatActivity {
         layoutFooter = (LinearLayout) findViewById(R.id.div_footer);
         btnKonfirmasi = (Button) findViewById(R.id.btn_konfirmasi);
         btnPesanan = (Button) findViewById(R.id.btn_pesanan_diterima);
+        btn_cancel = (Button) findViewById(R.id.btn_cancel);
+        btn_next = (Button) findViewById(R.id.btn_next);
         mApiInterface = ApiClient.getClient().create(ApiInterface.class);
         sharedPreferences = getApplicationContext().getSharedPreferences("remember", Context.MODE_PRIVATE);
         token = sharedPreferences.getString("TOKEN", "fail");
@@ -97,7 +99,7 @@ public class TransaksiActivity extends AppCompatActivity {
         btnPesanan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               confirm();
+               confirm("3");
             }
         });
         btnKonfirmasi.setOnClickListener(new View.OnClickListener() {
@@ -120,6 +122,20 @@ public class TransaksiActivity extends AppCompatActivity {
 
         recyclerViewProduk.setLayoutManager(layoutManager);
 
+        btn_next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                confirm("4");
+            }
+        });
+
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                confirm("5");
+            }
+        });
+
 
     }
 
@@ -141,13 +157,17 @@ public class TransaksiActivity extends AppCompatActivity {
                 textTelepon.setText(response.body().getOrderDetail().getPhone());
                 textAlamat.setText(response.body().getOrderDetail().getAddress());
                 textTanggal.setText("Deadline: "+response.body().getOrderDetail().getDeadline());
-//                if(response.body().getOrderDetail().getCost() == null){
-//                    textTotal.setText(textTotalBelanja.getText().toString());
-//                }else{
-//                    Log.d("HALLO","HAI");
-//                    Integer ttl=Integer.parseInt(textTotalBelanja.getText().toString()) + Integer.parseInt(response.body().getOrderDetail().getCost());
-//                    textTotal.setText("Rp." +ttl.toString());
-//                }
+                if(response.body().getOrderList().get(0).getStatus().equals("6")){
+                    btn_cancel.setVisibility(View.VISIBLE);
+                    btn_next.setVisibility(View.VISIBLE);
+                    btnPesanan.setVisibility(View.GONE );
+                    btnKonfirmasi.setVisibility(View.GONE );
+                }else{
+                    btn_cancel.setVisibility(View.GONE);
+                    btn_next.setVisibility(View.GONE);
+                    btnPesanan.setVisibility(View.VISIBLE);
+                    btnKonfirmasi.setVisibility(View.VISIBLE);
+                }
                 if(response.body().getOrderDetail().getPengiriman().equals("1")){
                     textOngkir.setText("Rp."+response.body().getOrderDetail().getCost());
                     textPegiriman.setText("Kirim Pesnanan");
@@ -168,14 +188,19 @@ public class TransaksiActivity extends AppCompatActivity {
         });
     }
 
-    public void confirm(){
-        Call<UpdateStatus> updateStatusCall= mApiInterface.updateStatus("Bearer "+token,code,"3",user_id);
+    public void confirm(String status){
+
+        Call<UpdateStatus> updateStatusCall= mApiInterface.updateStatus("Bearer "+token,code,status,user_id);
         updateStatusCall.enqueue(new Callback<UpdateStatus>() {
             @Override
             public void onResponse(Call<UpdateStatus> call, Response<UpdateStatus> response) {
                 Toast.makeText(getApplicationContext(),"Pesanan telah diterima",Toast.LENGTH_LONG).show();
-                Intent Test1 = new Intent(getApplicationContext(), RiwayatActivity.class);
-                startActivity(Test1);
+                if(status.equals("3")||status.equals("5")){
+                    Intent Test1 = new Intent(getApplicationContext(), RiwayatActivity.class);
+                    startActivity(Test1);
+                }else if(status.equals("4")){
+                    initData();
+                }
             }
 
             @Override

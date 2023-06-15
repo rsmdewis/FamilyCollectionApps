@@ -16,6 +16,9 @@ public class Order {
     @SerializedName("qty")
     private String qty;
 
+    @SerializedName("status")
+    private String status;
+
     @SerializedName("product")
     private Product listProduct=null;
 
@@ -58,5 +61,13 @@ public class Order {
 
     public void setQty(String qty) {
         this.qty = qty;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

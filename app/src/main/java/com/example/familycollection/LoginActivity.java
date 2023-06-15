@@ -74,47 +74,14 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                progressDialog.show();
-                Call<GetAkun> akunCall = mApiInterface.postLogin(editUser.getText().toString(), editPass.getText().toString());
-                akunCall.enqueue(new Callback<GetAkun>() {
-                    @Override
-                    public void onResponse(Call<GetAkun> call, Response<GetAkun> response) {
-                        progressDialog.dismiss();
-                        String message=response.message();
-                        if(response.message().equals("Created")){
-                            akuns = new ArrayList<>();
-                            akuns.add(response.body().getListDataAkun());
-                            Toast.makeText(LoginActivity.this, "Berhasil Login", Toast.LENGTH_LONG).show();
-                            String token=response.body().getToken();
-                            String id=akuns.get(0).getId();
-                            String nama=akuns.get(0).getName();
-                            String email=akuns.get(0).getEmail();
-                            String phone=akuns.get(0).getPhone();
+                if (editUser.getText().toString().length() == 0)
+                    editUser.setError("Tidak Boleh Kosong!");
+                else if (editPass.getText().toString().length() == 0) {
+                    editPass.setError("Tidak Boleh Kosong!");
+                }else{
+                    login();
+                }
 
-
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            editor.putString("TOKEN", token);
-                            editor.putString("USER_ID", id);
-                            editor.putString("NAMA", nama);
-                            editor.putString("EMAIL", email);
-                            editor.putString("PHONE", phone);
-
-                            editor.apply();
-                            startActivity(intent);
-                            finish();
-                        }else{
-                            Toast.makeText(LoginActivity.this, "Username atau password salah", Toast.LENGTH_LONG).show();
-                        }
-
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<GetAkun> call, Throwable t) {
-                        Log.e("Error", ""+t);
-                        progressDialog.dismiss();
-                    }
-                });
             }
         });
         textRegister.setOnClickListener(new View.OnClickListener() {
@@ -122,6 +89,50 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent Test1 = new Intent(getApplicationContext(), RegisterActivity.class);
                 startActivity(Test1);
+            }
+        });
+    }
+
+    private void login(){
+        progressDialog.show();
+        Call<GetAkun> akunCall = mApiInterface.postLogin(editUser.getText().toString(), editPass.getText().toString());
+        akunCall.enqueue(new Callback<GetAkun>() {
+            @Override
+            public void onResponse(Call<GetAkun> call, Response<GetAkun> response) {
+                progressDialog.dismiss();
+                String message=response.message();
+                if(response.message().equals("Created")){
+                    akuns = new ArrayList<>();
+                    akuns.add(response.body().getListDataAkun());
+                    Toast.makeText(LoginActivity.this, "Berhasil Login", Toast.LENGTH_LONG).show();
+                    String token=response.body().getToken();
+                    String id=akuns.get(0).getId();
+                    String nama=akuns.get(0).getName();
+                    String email=akuns.get(0).getEmail();
+                    String phone=akuns.get(0).getPhone();
+
+
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    editor.putString("TOKEN", token);
+                    editor.putString("USER_ID", id);
+                    editor.putString("NAMA", nama);
+                    editor.putString("EMAIL", email);
+                    editor.putString("PHONE", phone);
+
+                    editor.apply();
+                    startActivity(intent);
+                    finish();
+                }else{
+                    Toast.makeText(LoginActivity.this, "Username atau password salah", Toast.LENGTH_LONG).show();
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<GetAkun> call, Throwable t) {
+                Log.e("Error", ""+t);
+                progressDialog.dismiss();
             }
         });
     }
