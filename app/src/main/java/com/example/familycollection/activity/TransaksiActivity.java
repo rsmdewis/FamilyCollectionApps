@@ -164,10 +164,12 @@ public class TransaksiActivity extends AppCompatActivity {
                     btn_next.setVisibility(View.VISIBLE);
                     btnPesanan.setVisibility(View.GONE );
                     btnKonfirmasi.setVisibility(View.GONE );
-                }else{
+                } else if (response.body().getOrderList().get(0).getStatus().equals("2")) {
+                    btnPesanan.setVisibility(View.VISIBLE);
+                } else{
                     btn_cancel.setVisibility(View.GONE);
                     btn_next.setVisibility(View.GONE);
-                    btnPesanan.setVisibility(View.VISIBLE);
+//                    btnPesanan.setVisibility(View.VISIBLE);
                     btnKonfirmasi.setVisibility(View.VISIBLE);
                 }
                 if(response.body().getOrderDetail().getPengiriman().equals("1")){

@@ -80,7 +80,7 @@ public class AdapterStatus extends RecyclerView.Adapter<AdapterStatus.MyViewHold
         }
         holder.status.setText(status);
         holder.tv_pengiriman.setText(pengiriman);
-        holder.jumlah.setText(transaction.getTotal_product()+ " Item");
+//        holder.jumlah.setText(transaction.getTotal_product()+ " Item");
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,7 +105,7 @@ public class AdapterStatus extends RecyclerView.Adapter<AdapterStatus.MyViewHold
         private TextView namaproduk;
         private TextView tanggal;
         private TextView total;
-        private TextView jumlah;
+//        private TextView jumlah;
         private TextView status,tv_pengiriman;
 //        private TextView detail;
 
@@ -115,7 +115,7 @@ public class AdapterStatus extends RecyclerView.Adapter<AdapterStatus.MyViewHold
             namaproduk=itemView.findViewById(R.id.tv_namaproduk);
             tanggal=itemView.findViewById(R.id.tv_tgl);
             total=itemView.findViewById(R.id.tv_total);
-            jumlah=itemView.findViewById(R.id.tv_jumlah);
+//            jumlah=itemView.findViewById(R.id.tv_jumlah);
             status=itemView.findViewById(R.id.tv_status);
             tv_pengiriman=itemView.findViewById(R.id.tv_pengiriman);
 //            detail=itemView.findViewById(R.id.btn_detail);

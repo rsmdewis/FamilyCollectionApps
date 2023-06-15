@@ -337,6 +337,7 @@
                 android:layout_margin="10dp"
                 android:text="Lanjut Transaksi"/>
             <Button
+                android:visibility="gone"
                 android:id="@+id/btn_pesanan_diterima"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
