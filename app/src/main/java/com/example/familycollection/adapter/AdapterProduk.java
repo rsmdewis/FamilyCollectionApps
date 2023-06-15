@@ -36,7 +36,7 @@ public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.MyViewHold
         Product produk =productList.get(position);
         holder.namaproduk.setText(produk.getNama());
         holder.harga.setText(produk.getPrice());
-        final String urlGambarBerita = "http://10.10.173.97:8000/storage/" + produk.getGambar();
+        final String urlGambarBerita = "http://192.168.1.18:8000/storage/" + produk.getGambar();
         Picasso.get().load(urlGambarBerita).into(holder.fotoproduk);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -46,6 +46,7 @@ public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.MyViewHold
                 mIntent.putExtra("id",productList.get(position).getId());
                 mIntent.putExtra("nama",productList.get(position).getNama());
                 mIntent.putExtra("harga",productList.get(position).getPrice());
+                mIntent.putExtra("berat",productList.get(position).getWeight());
                 mIntent.putExtra("deskripsi",productList.get(position).getDeskripsi());
                 mIntent.putExtra("gambar",productList.get(position).getGambar());
                 view.getContext().startActivity(mIntent);

@@ -73,10 +73,11 @@ public class DetailProdukActivity extends AppCompatActivity {
 
         mApiInterface = ApiClient.getClient().create(ApiInterface.class);
         mIntent=getIntent();
-        final String urlGambarBerita = "http://10.10.173.97:8000/storage/" + mIntent.getStringExtra("gambar");
+        final String urlGambarBerita = "http://192.168.1.18:8000/storage/" + mIntent.getStringExtra("gambar");
         Picasso.get().load(urlGambarBerita).into(imgProduk);
         textNama.setText(mIntent.getStringExtra("nama"));
         textHarga.setText("Rp. "+mIntent.getStringExtra("harga"));
+        textBerat.setText(mIntent.getStringExtra("berat") + " gram");
         textDeskripsi.setText(mIntent.getStringExtra("deskripsi"));
 
         progressDialog = new ProgressDialog(DetailProdukActivity.this);
