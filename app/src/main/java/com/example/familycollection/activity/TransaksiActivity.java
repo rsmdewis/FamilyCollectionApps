@@ -150,7 +150,7 @@ public class TransaksiActivity extends AppCompatActivity {
                 orderList=response.body().getOrderList();
                 adapter= new AdapterProdukTransaksi(orderList,textTotalBelanja,response.body().getOrderDetail().getCost(),textTotal);
                 recyclerViewProduk.setAdapter(adapter);
-                final String urlGambarBerita = "http://192.168.1.18:8000/storage/" + response.body().getOrderDetail().getImage();
+                final String urlGambarBerita = "http://10.10.7.69:8000/storage/" + response.body().getOrderDetail().getImage();
                 Picasso.get().load(urlGambarBerita).into(fotoTambahan);
                 textKeterangan.setText(response.body().getOrderDetail().getDescription());
                 textSelesai.setText(response.body().getOrderDetail().getDeadline());

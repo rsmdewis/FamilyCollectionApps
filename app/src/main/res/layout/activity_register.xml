@@ -83,7 +83,7 @@
             android:background="@drawable/edit_bg"
             android:ems="10"
             android:hint="Telepon Anda"
-            android:inputType="textPersonName"
+            android:inputType="phone"
             android:padding="16dp" />
         <Button
             android:id="@+id/btn_register"
