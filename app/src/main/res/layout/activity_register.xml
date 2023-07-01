@@ -19,7 +19,6 @@
             android:id="@+id/tv_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="150dp"
             android:textAlignment="center"
             android:text="Register"
             android:textColor="#6672ff"
@@ -39,52 +38,137 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cl_register" >
-
-
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nama Lengkap Anda"
+            android:textStyle="bold"/>
         <EditText
             android:id="@+id/inp_nama"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="16dp"
             android:layout_weight="1"
-            android:background="@drawable/edit_bg"
+            android:background="@drawable/bg_profile2"
             android:ems="10"
-            android:hint="Nama Lengkap Anda"
             android:inputType="textPersonName"
             android:padding="16dp" />
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email Anda"
+            android:textStyle="bold"/>
         <EditText
             android:id="@+id/inp_email"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="16dp"
             android:layout_weight="1"
-            android:background="@drawable/edit_bg"
+            android:background="@drawable/bg_profile2"
             android:ems="10"
-            android:hint="Email Anda"
-            android:inputType="textPersonName"
+            android:inputType="textEmailAddress"
             android:padding="16dp" />
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Password Anda"
+            android:textStyle="bold"/>
         <EditText
             android:id="@+id/inp_password"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="16dp"
             android:layout_weight="1"
-            android:background="@drawable/edit_bg"
+            android:background="@drawable/bg_profile2"
             android:ems="10"
-            android:hint="Password Anda"
             android:inputType="textPassword"
             android:padding="16dp" />
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Telepon Anda"
+            android:textStyle="bold"/>
         <EditText
             android:id="@+id/inp_phone"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="16dp"
             android:layout_weight="1"
-            android:background="@drawable/edit_bg"
+            android:background="@drawable/bg_profile2"
             android:ems="10"
-            android:hint="Telepon Anda"
             android:inputType="phone"
             android:padding="16dp" />
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pilih Provinsi"
+            android:textStyle="bold"/>
+        <RelativeLayout
+            android:id="@+id/div_provinsi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_profile2"
+            >
+
+            <Spinner
+                android:id="@+id/spn_provinsi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:textSize="14dp" />
+
+        </RelativeLayout>
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pilih Kota"
+            android:textStyle="bold"/>
+        <RelativeLayout
+            android:id="@+id/div_kota"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_profile2"
+            >
+
+            <Spinner
+                android:id="@+id/spn_kota"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:textSize="14dp" />
+
+        </RelativeLayout>
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Alamat Anda"
+            android:textStyle="bold"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_profile2">
+
+            <EditText
+                android:id="@+id/edt_alamat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@null"
+                android:hint="Jalan, No, RT/RW*"
+                android:inputType="textMultiLine"
+                android:lines="3"
+                android:textSize="14dp" />
+
+        </RelativeLayout>
         <Button
             android:id="@+id/btn_register"
             style="@style/loginButton"
@@ -94,12 +178,13 @@
         <TextView
             android:id="@+id/tv_login"
             style="@style/parent"
-            android:layout_marginTop="@dimen/loginViewsMargin"
+            android:layout_marginTop="5dp"
             android:text="Already have an account? Sign In"
             android:textAlignment="textEnd"
             android:textColor="@color/primaryTextColor"
             android:textStyle="bold"
             android:gravity="end"/>
+
 
     </LinearLayout>
 

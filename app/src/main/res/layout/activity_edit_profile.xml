@@ -22,16 +22,20 @@
       android:orientation="vertical"
       android:layout_marginStart="32dp"
       android:layout_marginEnd="32dp"
-      android:layout_marginTop="100dp"
+      android:layout_marginTop="55dp"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent">
-
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nama Lengkap Anda"
+        android:textStyle="bold"/>
     <EditText
         android:id="@+id/inp_nama"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="16dp"
         android:layout_weight="1"
         android:background="@drawable/edit_bg"
         android:ems="10"
@@ -40,11 +44,16 @@
         android:textColor="@color/black"
         android:inputType="textPersonName"
         android:padding="16dp" />
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email Anda"
+        android:textStyle="bold"/>
     <EditText
         android:id="@+id/inp_email"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="16dp"
         android:layout_weight="1"
         android:background="@drawable/edit_bg"
         android:ems="10"
@@ -53,11 +62,16 @@
         android:textColor="@color/black"
         android:inputType="textPersonName"
         android:padding="16dp" />
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Telepon Anda"
+        android:textStyle="bold"/>
     <EditText
         android:id="@+id/inp_nohp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="16dp"
         android:layout_weight="1"
         android:background="@drawable/edit_bg"
         android:ems="10"
@@ -66,17 +80,93 @@
         android:textColor="@color/black"
         android:inputType="phone"
         android:padding="16dp" />
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Password Anda"
+        android:textStyle="bold"/>
     <EditText
         android:id="@+id/inp_password"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="16dp"
         android:layout_weight="1"
         android:background="@drawable/edit_bg"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
         android:padding="16dp" />
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pilih Provinsi"
+        android:textStyle="bold"/>
+    <RelativeLayout
+        android:id="@+id/div_provinsi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_bg"
+        >
+
+      <Spinner
+          android:id="@+id/spn_provinsi"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="10dp"
+          android:layout_marginTop="10dp"
+          android:layout_marginEnd="10dp"
+          android:layout_marginBottom="10dp"
+          android:textSize="14dp" />
+
+    </RelativeLayout>
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pilih Kota"
+        android:textStyle="bold"/>
+    <RelativeLayout
+        android:id="@+id/div_kota"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_bg"
+        >
+
+      <Spinner
+          android:id="@+id/spn_kota"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="10dp"
+          android:textSize="14dp" />
+
+    </RelativeLayout>
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Alamat Anda"
+        android:textStyle="bold"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_bg">
+
+      <EditText
+          android:id="@+id/edt_alamat"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="10dp"
+          android:layout_marginTop="10dp"
+          android:layout_marginEnd="10dp"
+          android:layout_marginBottom="10dp"
+          android:background="@null"
+          android:hint="Jalan, No, RT/RW*"
+          android:inputType="textMultiLine"
+          android:lines="3"
+          android:textSize="14dp" />
+
+    </RelativeLayout>
     <Button
         android:id="@+id/btn_simpan"
         android:layout_width="match_parent"
