@@ -110,6 +110,9 @@ public class LoginActivity extends AppCompatActivity {
                     String nama=akuns.get(0).getName();
                     String email=akuns.get(0).getEmail();
                     String phone=akuns.get(0).getPhone();
+                    String city_id=akuns.get(0).getCity_id();
+                    String province_id=akuns.get(0).getProvince_id();
+                    String address=akuns.get(0).getAddress();
 
 
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -118,6 +121,9 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putString("NAMA", nama);
                     editor.putString("EMAIL", email);
                     editor.putString("PHONE", phone);
+                    editor.putString("CITY_ID", city_id);
+                    editor.putString("PROVINCE_ID", province_id);
+                    editor.putString("ADDRESS", address);
 
                     editor.apply();
                     startActivity(intent);
@@ -128,7 +134,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
             }
-
             @Override
             public void onFailure(Call<GetAkun> call, Throwable t) {
                 Log.e("Error", ""+t);

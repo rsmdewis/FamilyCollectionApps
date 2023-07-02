@@ -27,19 +27,14 @@ public class TambahAlamatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tambah_alamat);
 
-        editNama = (EditText) findViewById(R.id.edt_nama);
-        editNohp = (EditText) findViewById(R.id.edt_phone);
+        editNama = (EditText) findViewById(R.id.edt_penerima);
+        editNohp = (EditText) findViewById(R.id.edt_telp);
         editAlamat = (EditText) findViewById(R.id.edt_alamat);
-        editType = (EditText) findViewById(R.id.edt_type);
-        editKodepos = (EditText) findViewById(R.id.edt_kodePos);
         rlProvinsi = (RelativeLayout) findViewById(R.id.div_provinsi);
         rlKota = (RelativeLayout) findViewById(R.id.div_kota);
-        rlKecamatan = (RelativeLayout) findViewById(R.id.div_kecamatan);
         spinnerProvinsi = (Spinner) findViewById(R.id.spn_provinsi);
         spinnerKota = (Spinner) findViewById(R.id.spn_kota);
-        spinnerKecamatan = (Spinner) findViewById(R.id.spn_kecamatan);
-        progressBar = (ProgressBar) findViewById(R.id.pb);
-        btnsimpan = (Button) findViewById(R.id.btn_simpan);
+        btnsimpan = (Button) findViewById(R.id.simpan);
 
         btnsimpan.setOnClickListener(new View.OnClickListener() {
             @Override

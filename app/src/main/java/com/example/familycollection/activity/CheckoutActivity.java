@@ -99,7 +99,7 @@ public class CheckoutActivity extends AppCompatActivity implements AdapterCart.I
     private Uri filePath;
     ApiInterface mApiInterface;
     SharedPreferences sharedPreferences;
-    String id,token;
+    String id,token,city_id,province_id,name,phone,address;
 
     String deadline="";
     ImageView imageKeterangan;
@@ -166,7 +166,16 @@ public class CheckoutActivity extends AppCompatActivity implements AdapterCart.I
         mApiInterface = ApiClient.getClient().create(ApiInterface.class);
         sharedPreferences = getApplicationContext().getSharedPreferences("remember", Context.MODE_PRIVATE);
         token = sharedPreferences.getString("TOKEN", "fail");
+        name=sharedPreferences.getString("NAMA", "fail");
+        phone=sharedPreferences.getString("PHONE", "fail");
         id = sharedPreferences.getString("USER_ID", "fail");
+        city_id=sharedPreferences.getString("CITY_ID", "fail");
+        province_id=sharedPreferences.getString("PROVINCE_ID", "fail");
+        address=sharedPreferences.getString("ADDRESS", "fail");
+
+        editPenerima.setText(name);
+        editTelepon.setText(phone);
+        editAlamat.setText(address);
         btnpesan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -356,6 +365,12 @@ public class CheckoutActivity extends AppCompatActivity implements AdapterCart.I
                         android.R.layout.simple_spinner_item, listSpinner);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinnerKota.setAdapter(adapter);
+                for (City city : cityList) {
+                    if (city.getCity_id().equals(city_id)) {
+                        int spinnerPosition = adapter.getPosition(city.getCity_name());
+                        spinnerKota.setSelection(spinnerPosition);
+                    }
+                }
                 progressDialog.dismiss();
             }
 
@@ -367,6 +382,7 @@ public class CheckoutActivity extends AppCompatActivity implements AdapterCart.I
     }
 
     private void getProvince(){
+        progressDialog.show();
         Call<GetProvince> getProvinceCall=mApiInterface.getProvince();
         getProvinceCall.enqueue(new Callback<GetProvince>() {
             @Override
@@ -380,6 +396,14 @@ public class CheckoutActivity extends AppCompatActivity implements AdapterCart.I
                         android.R.layout.simple_spinner_item, listSpinner);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinnerProvinsi.setAdapter(adapter);
+                for (Province province1 : provinceList) {
+                    if (province1.getProvince_id().equals(province_id)) {
+                        int spinnerPosition = adapter.getPosition(province1.getProvince());
+                        spinnerProvinsi.setSelection(spinnerPosition);
+                    }
+                }
+                progressDialog.dismiss();
+
             }
 
             @Override

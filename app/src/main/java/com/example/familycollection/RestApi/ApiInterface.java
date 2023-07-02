@@ -61,7 +61,10 @@ public interface ApiInterface {
     Call<Register> register(@Field("email") String email,
                             @Field("phone") String phone,
                             @Field("password") String password,
-                            @Field("name") String name);
+                            @Field("name") String name,
+                            @Field("city_id") String city_id,
+                            @Field("province_id") String province_id,
+                            @Field("address") String address);
 
     @FormUrlEncoded
     @POST("auth/update")
@@ -71,7 +74,10 @@ public interface ApiInterface {
                             @Field("email") String email,
                             @Field("phone") String phone,
                             @Field("password") String password,
-                            @Field("name") String name);
+                            @Field("name") String name,
+                            @Field("province_id") String province_id,
+                            @Field("city_id") String city_id,
+                            @Field("address") String address);
     @GET("transaction/history")
     Call<GetTransaction> getTransaction(@Query("user_id") String user_id, @Header("Authorization") String auth,@Query("type") String type);
 
