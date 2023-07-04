@@ -1,5 +1,6 @@
 package com.example.familycollection.adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,15 +19,18 @@ import java.util.List;
 
 public class AdapterProdukTransaksi extends RecyclerView.Adapter<AdapterProdukTransaksi.MyViewHolder> {
     private List<Order> orderList;
-    private  TextView textViewTotal,textGrandTotal;
+    private  TextView textViewTotal,textGrandTotal,textPelunasan;
     Integer grandTotal=0;
+    Integer grandPelunasan=0;
 
-    String cost;
-    public AdapterProdukTransaksi (List<Order>orderList,TextView textViewTotal,String cost, TextView textGrandTotal){
+    String cost,pelunasan;
+    public AdapterProdukTransaksi (List<Order>orderList,TextView textViewTotal,String cost, TextView textGrandTotal,TextView textPelunasan,String pelunasan){
         this.orderList=orderList;
         this.textViewTotal=textViewTotal;
         this.cost=cost;
         this.textGrandTotal=textGrandTotal;
+        this.textPelunasan=textPelunasan;
+        this.pelunasan=pelunasan;
     }
 
     @NonNull
@@ -52,13 +56,19 @@ public class AdapterProdukTransaksi extends RecyclerView.Adapter<AdapterProdukTr
         holder.tv_jumlah.setText(order.getQty()+ " item");
 
         grandTotal=grandTotal+Total;
+        grandPelunasan=grandTotal-Integer.parseInt(pelunasan);
         textViewTotal.setText("Rp. "+String.valueOf(grandTotal));
 
+
         if(cost != null){
+            grandPelunasan=grandPelunasan-Integer.parseInt(cost);
             textGrandTotal.setText("Rp. "+String.valueOf(grandTotal+Integer.parseInt(cost)));
         }else{
             textGrandTotal.setText("Rp. "+String.valueOf(grandTotal));
         }
+
+        Log.d("RES 1",""+grandPelunasan);
+        textPelunasan.setText("Rp. "+String.valueOf(grandPelunasan));
 
     }
 
