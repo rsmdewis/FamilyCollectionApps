@@ -56,17 +56,19 @@ public class AdapterProdukTransaksi extends RecyclerView.Adapter<AdapterProdukTr
         holder.tv_jumlah.setText(order.getQty()+ " item");
 
         grandTotal=grandTotal+Total;
-        grandPelunasan=grandTotal-Integer.parseInt(pelunasan);
+
         textViewTotal.setText("Rp. "+String.valueOf(grandTotal));
 
 
         if(cost != null){
-            grandPelunasan=grandPelunasan-Integer.parseInt(cost);
+            grandPelunasan=grandTotal+Integer.parseInt(cost);
             textGrandTotal.setText("Rp. "+String.valueOf(grandTotal+Integer.parseInt(cost)));
         }else{
+            grandPelunasan=grandTotal;
             textGrandTotal.setText("Rp. "+String.valueOf(grandTotal));
         }
 
+        grandPelunasan=grandTotal-Integer.parseInt(pelunasan);
         Log.d("RES 1",""+grandPelunasan);
         textPelunasan.setText("Rp. "+String.valueOf(grandPelunasan));
 
