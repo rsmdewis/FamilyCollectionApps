@@ -148,7 +148,7 @@ public class TransaksiActivity extends AppCompatActivity {
             public void onResponse(Call<ShowOrder> call, Response<ShowOrder> response) {
                 progressDialog.dismiss();
                 orderList=response.body().getOrderList();
-                adapter= new AdapterProdukTransaksi(orderList,textTotalBelanja,response.body().getOrderDetail().getCost(),textTotal);
+                adapter= new AdapterProdukTransaksi(orderList,textTotalBelanja,response.body().getOrderDetail().getCost(),textTotal,textLunas,response.body().getOrderDetail().getTotal_pelunasan());
                 recyclerViewProduk.setAdapter(adapter);
                 final String urlGambarBerita = "http://192.168.1.3:8000/storage/" + response.body().getOrderDetail().getImage();
                 Picasso.get().load(urlGambarBerita).into(fotoTambahan);
@@ -184,8 +184,7 @@ public class TransaksiActivity extends AppCompatActivity {
                     textPegiriman.setText("Ambil Sendiri");
                     textOngkir.setText("Rp. 0");
                 }
-
-                textLunas.setText("Rp. "+response.body().getOrderDetail().getTotal_pelunasan());
+//                textLunas.setText("Rp. "+response.body().getOrderDetail().getTotal_pelunasan());
 
             }
 
