@@ -222,12 +222,6 @@
                                 android:textSize="14dp" />
 
                         </RelativeLayout>
-                        <Button
-                            android:id="@+id/btnAlamat"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Ubah Alamat"
-                            />
 
 <!--                        <ProgressBar-->
 <!--                            android:id="@+id/pb"-->

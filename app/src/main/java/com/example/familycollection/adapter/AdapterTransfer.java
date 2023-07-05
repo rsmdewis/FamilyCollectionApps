@@ -33,7 +33,7 @@ public class AdapterTransfer extends RecyclerView.Adapter<AdapterTransfer.MyView
     public void onBindViewHolder(@NonNull AdapterTransfer.MyViewHolder holder, int position) {
         Payment payment =paymentList.get(position);
         String status;
-        final String urlGambarBerita = "http://10.10.7.69:8000/storage/" + payment.getImage();
+        final String urlGambarBerita = "http://192.168.1.3:8000/storage/" + payment.getImage();
         Picasso.get().load(urlGambarBerita).into(holder.buktiTransfer);
         holder.tanggal.setText(payment.getCreated_at());
         holder.nominal.setText(payment.getPrice());
