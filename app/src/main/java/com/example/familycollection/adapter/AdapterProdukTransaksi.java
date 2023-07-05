@@ -68,7 +68,7 @@ public class AdapterProdukTransaksi extends RecyclerView.Adapter<AdapterProdukTr
             textGrandTotal.setText("Rp. "+String.valueOf(grandTotal));
         }
 
-        grandPelunasan=grandTotal-Integer.parseInt(pelunasan);
+        grandPelunasan=grandPelunasan-Integer.parseInt(pelunasan);
         Log.d("RES 1",""+grandPelunasan);
         textPelunasan.setText("Rp. "+String.valueOf(grandPelunasan));
 
