@@ -170,12 +170,12 @@ public class TransaksiActivity extends AppCompatActivity {
                     btn_cancel.setVisibility(View.GONE);
                     btn_next.setVisibility(View.GONE);
                     btnKonfirmasi.setVisibility(View.GONE);
-                }
-                else{
+                } else if (response.body().getOrderList().get(0).getStatus().equals("4")) {
+                    btnKonfirmasi.setVisibility(View.VISIBLE);
+                } else{
                     btn_cancel.setVisibility(View.GONE);
                     btn_next.setVisibility(View.GONE);
 //                    btnPesanan.setVisibility(View.VISIBLE);
-                    btnKonfirmasi.setVisibility(View.VISIBLE);
                 }
                 if(response.body().getOrderDetail().getPengiriman().equals("1")){
                     textOngkir.setText("Rp."+response.body().getOrderDetail().getCost());
