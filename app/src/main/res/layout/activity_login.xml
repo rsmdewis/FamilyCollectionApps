@@ -58,11 +58,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cl_login" >
         <TextView
-            android:text="rsm@gmail.com"
+            android:text="Email : rsm@gmail.com"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <TextView
-            android:text="password"
+            android:text="Password : password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <EditText
@@ -74,7 +74,7 @@
             android:background="@drawable/edit_bg"
             android:ems="10"
             android:textSize="14dp"
-            android:hint="Username"
+            android:hint="Email"
             android:inputType="textEmailAddress"
             android:padding="16dp" />
 

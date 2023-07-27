@@ -178,7 +178,7 @@ public class TransaksiActivity extends AppCompatActivity {
                 Log.d("ES",response.body().getOrderDetail().getPengiriman());
                 if(response.body().getOrderDetail().getPengiriman().equals("1")){
                     textOngkir.setText("Rp."+response.body().getOrderDetail().getCost());
-                    textPegiriman.setText("Kirim Pesnanan");
+                    textPegiriman.setText("Kirim Pesanan");
                 }else{
                     textPegiriman.setText("Ambil Sendiri");
                     textOngkir.setText("Rp. 0");

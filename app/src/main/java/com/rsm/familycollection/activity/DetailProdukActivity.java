@@ -18,7 +18,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.familycollection.R;
+import com.rsm.familycollection.R;
 import com.rsm.familycollection.RestApi.ApiClient;
 import com.rsm.familycollection.RestApi.ApiInterface;
 import com.rsm.familycollection.models.AddCart;
