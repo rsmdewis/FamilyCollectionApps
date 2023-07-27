@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.familycollection'
+    namespace 'com.rsm.familycollection'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.familycollection"
+        applicationId "com.rsm.familycollection"
         minSdk 21
         targetSdk 33
         versionCode 1
