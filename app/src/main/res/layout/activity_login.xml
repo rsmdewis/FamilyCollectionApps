@@ -66,8 +66,9 @@
             android:layout_weight="1"
             android:background="@drawable/edit_bg"
             android:ems="10"
+            android:textSize="14dp"
             android:hint="Username"
-            android:inputType="textPersonName"
+            android:inputType="textEmailAddress"
             android:padding="16dp" />
         <EditText
             android:id="@+id/inp_password"
@@ -77,6 +78,7 @@
             android:layout_weight="1"
             android:background="@drawable/edit_bg"
             android:ems="10"
+            android:textSize="14dp"
             android:hint="Password"
             android:inputType="textPassword"
             android:padding="16dp" />

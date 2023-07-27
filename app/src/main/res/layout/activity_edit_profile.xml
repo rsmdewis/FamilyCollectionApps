@@ -43,7 +43,8 @@
         android:text="Risma Dewi Septiani"
         android:textColor="@color/black"
         android:inputType="textPersonName"
-        android:padding="16dp" />
+        android:padding="16dp"
+        android:textSize="14dp"/>
     <TextView
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
@@ -60,8 +61,9 @@
         android:hint="Email"
         android:text="rsmdewis2409@gmail.com"
         android:textColor="@color/black"
-        android:inputType="textPersonName"
-        android:padding="16dp" />
+        android:inputType="textEmailAddress"
+        android:padding="16dp"
+        android:textSize="14dp"/>
     <TextView
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
@@ -79,7 +81,8 @@
         android:text="081553021636"
         android:textColor="@color/black"
         android:inputType="phone"
-        android:padding="16dp" />
+        android:padding="16dp"
+        android:textSize="14dp"/>
     <TextView
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
@@ -95,7 +98,8 @@
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
-        android:padding="16dp" />
+        android:padding="16dp"
+        android:textSize="14dp"/>
     <TextView
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"

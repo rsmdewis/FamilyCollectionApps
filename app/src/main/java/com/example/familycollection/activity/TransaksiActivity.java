@@ -158,7 +158,7 @@ public class TransaksiActivity extends AppCompatActivity {
                 textPenerima.setText(response.body().getOrderDetail().getName());
                 textTelepon.setText(response.body().getOrderDetail().getPhone());
                 textAlamat.setText(response.body().getOrderDetail().getAddress());
-                textTanggal.setText("Deadline: "+response.body().getOrderDetail().getDeadline());
+                textTanggal.setText("Tanggal Pengiriman : "+response.body().getOrderDetail().getDeadline());
                 if(response.body().getOrderList().get(0).getStatus().equals("6")){
                     btn_cancel.setVisibility(View.VISIBLE);
                     btn_next.setVisibility(View.VISIBLE);

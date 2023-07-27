@@ -79,7 +79,7 @@
                         <TextView
                             android:layout_marginTop="32px"
                             android:layout_marginBottom="32px"
-                            android:text="Tanggal deadline : "
+                            android:text="Tanggal Pengiriman : "
                             android:id="@+id/tv_dateresult"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
