@@ -10,6 +10,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -75,8 +76,13 @@ public class CartActivity extends AppCompatActivity implements AdapterCart.IMeth
         textViewBayar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent Test1 = new Intent(getApplicationContext(), CheckoutActivity.class);
-                startActivity(Test1);
+                if(cartList.size() == 0){
+                    Toast.makeText(getApplicationContext(),"Keranjang anda kosong",Toast.LENGTH_LONG).show();
+                }else{
+                    Intent Test1 = new Intent(getApplicationContext(), CheckoutActivity.class);
+                    startActivity(Test1);
+                }
+
             }
         });
 
@@ -93,6 +99,9 @@ public class CartActivity extends AppCompatActivity implements AdapterCart.IMeth
                 adapter= new AdapterCart(cartList,getApplicationContext(),CartActivity.this,textViewTotal);
                 recyclerViewCart.setLayoutManager(layoutManager);
                 recyclerViewCart.setAdapter(adapter);
+
+//
+
 //                textViewTotal.setText(response.body().getGrand_total_total());
             }
 

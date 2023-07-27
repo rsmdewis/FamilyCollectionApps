@@ -24,6 +24,8 @@ import com.rsm.familycollection.RestApi.ApiInterface;
 import com.rsm.familycollection.activitymenu.MainActivity;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -84,7 +86,9 @@ public class LoginActivity extends AppCompatActivity {
                     editUser.setError("Tidak Boleh Kosong!");
                 else if (editPass.getText().toString().length() == 0) {
                     editPass.setError("Tidak Boleh Kosong!");
-                }else{
+                } else if (!isEmailValid(editUser.getText().toString())) {
+                    editUser.setError("Data harus berupa email !");
+                } else{
                     login();
                 }
 
@@ -99,6 +103,12 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    public static boolean isEmailValid(String email) {
+        String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
+        Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
     private void login(){
         progressDialog.show();
         Call<GetAkun> akunCall = mApiInterface.postLogin(editUser.getText().toString(), editPass.getText().toString());
